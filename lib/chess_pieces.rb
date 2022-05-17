@@ -9,6 +9,10 @@ module ChessPieces
     @symbol.colorize(@color.to_sym)
   end
 
+  def with_bg_color(color)
+    colored_symbol.colorize(background: color.to_sym)
+  end
+
   def self.default_chess_board
     [king_row_of_color('black'),
      pawn_row_of_color('black'),
