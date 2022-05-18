@@ -39,18 +39,16 @@ class Board
 
   # array of classes for the first row of a chess board
   def king_row_of_color(color)
-    [ChessPieces::Rook, ChessPieces::Knight, ChessPieces::Bishop, ChessPieces::Queen,
-     ChessPieces::King, ChessPieces::Bishop, ChessPieces::Knight, ChessPieces::Rook]
-      .map { |piece| piece.new(color) }
+    [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook].map { |piece| piece.new(color) }
   end
 
   # array of a row of pawns
   def pawn_row_of_color(color)
-    Array.new(8) { ChessPieces::Pawn.new(color) }
+    Array.new(8) { Pawn.new(color) }
   end
 
   # array of unoccupied classes
   def empty_row
-    Array.new(8) { ChessPieces::Unoccupied.new }
+    Array.new(8) { Unoccupied.new }
   end
 end

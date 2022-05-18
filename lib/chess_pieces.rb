@@ -2,8 +2,10 @@
 
 require 'colorize'
 
-# module containing chess piece class and common methods
-module ChessPieces
+# class containing chess piece class and common methods
+class Piece
+  attr_reader :color
+
   # returns a colorized chess piece symbol
   def colored_symbol
     " #{@symbol.colorize(@color.to_sym)} "
@@ -12,81 +14,65 @@ module ChessPieces
   def with_bg_color(color)
     colored_symbol.colorize(background: color.to_sym)
   end
+end
 
-  ### All chess piece classes
+### All chess piece classes
 
-  attr_reader :color
-
-  # class for empty tiles
-  class Unoccupied
-    include ChessPieces
-
-    def initialize(_color = nil)
-      @symbol = ' '
-    end
-
-    def colored_symbol
-      '   '
-    end
+# class for empty tiles
+class Unoccupied < Piece
+  def initialize(_color = nil)
+    @symbol = ' '
   end
 
-  # pawn chess piece class
-  class Pawn
-    include ChessPieces
-
-    def initialize(color)
-      @color = color
-      @symbol = '♟'
-    end
+  def colored_symbol
+    '   '
   end
+end
 
-  # knight chess piece class
-  class Knight
-    include ChessPieces
-
-    def initialize(color)
-      @color = color
-      @symbol = '♞'
-    end
+# pawn chess piece class
+class Pawn < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♟'
   end
+end
 
-  # bishop chess piece class
-  class Bishop
-    include ChessPieces
-
-    def initialize(color)
-      @color = color
-      @symbol = '♝'
-    end
+# knight chess piece class
+class Knight < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♞'
   end
+end
 
-  # rook chess piece class
-  class Rook
-    include ChessPieces
-
-    def initialize(color)
-      @color = color
-      @symbol = '♜'
-    end
+# bishop chess piece class
+class Bishop < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♝'
   end
+end
 
-  # queen chess piece class
-  class Queen
-    include ChessPieces
-
-    def initialize(color)
-      @color = color
-      @symbol = '♛'
-    end
+# rook chess piece class
+class Rook < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♜'
   end
+end
 
-  # king chess piece class
-  class King
-    include ChessPieces
+# queen chess piece class
+class Queen < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♛'
+  end
+end
 
-    def initialize(color)
-      @color = color
-      @symbol = '♚'
-    end
+# king chess piece class
+class King < Piece
+  def initialize(color)
+    @color = color
+    @symbol = '♚'
   end
 end
