@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'chess_pieces'
+# require all chess pieces
+pieces = %w[unoccupied pawn knight bishop rook queen king]
+pieces.each { |piece| require_relative "./piece/#{piece}" }
 
 # class handling chess board info
 class Board

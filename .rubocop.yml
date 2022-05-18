@@ -1,2 +1,5 @@
 Lint/MissingSuper:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
