@@ -19,4 +19,11 @@ class Board
       row.map { |piece| piece.with_bg_color(background_cycle.next) }
     end
   end
+
+  def display_board(board = colorized_board)
+    board.each do |row|
+      row.each { |tile| print tile }
+      puts
+    end
+  end
 end
