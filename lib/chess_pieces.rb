@@ -6,7 +6,7 @@ require 'colorize'
 module ChessPieces
   # returns a colorized chess piece symbol
   def colored_symbol
-    @symbol.colorize(@color.to_sym)
+    " #{@symbol.colorize(@color.to_sym)} "
   end
 
   def with_bg_color(color)
@@ -49,7 +49,7 @@ module ChessPieces
     end
 
     def colored_symbol
-      @symbol
+      '   '
     end
   end
 
