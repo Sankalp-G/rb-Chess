@@ -4,9 +4,13 @@ require 'colorize'
 class Piece
   attr_reader :color
 
+  def initialize(color)
+    @color = color
+  end
+
   # returns a colorized chess piece symbol
   def colored_symbol
-    " #{@symbol.colorize(@color.to_sym)} "
+    " #{symbol.colorize(@color.to_sym)} "
   end
 
   def with_bg_color(color)
