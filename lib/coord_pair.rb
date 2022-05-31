@@ -24,4 +24,10 @@ class CoordPair
     added_y = @y + other.y
     CoordPair.new(added_x, added_y)
   end
+
+  def ==(other)
+    raise 'coord can only be equated to another coord' unless other.is_a?(CoordPair)
+
+    @x == other.x && @y == other.y
+  end
 end

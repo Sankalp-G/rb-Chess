@@ -61,4 +61,43 @@ describe CoordPair do
       end
     end
   end
+
+  describe '#==' do
+    context 'when coord x and y are both equal' do
+      it 'returns true' do
+        coord1 = described_class.new(1, 6)
+        coord2 = described_class.new(1, 6)
+        expect(coord1 == coord2).to be(true)
+      end
+    end
+
+    context 'when only one coord is different' do
+      it 'returns false when x is different' do
+        coord1 = described_class.new(15, 36)
+        coord2 = described_class.new(12, 36)
+        expect(coord1 == coord2).to be(false)
+      end
+
+      it 'returns false when y is different' do
+        coord1 = described_class.new(12, 5)
+        coord2 = described_class.new(12, 36)
+        expect(coord1 == coord2).to be(false)
+      end
+    end
+
+    context 'when both coords are different' do
+      it 'returns false' do
+        coord1 = described_class.new(32, 5)
+        coord2 = described_class.new(-11, 36)
+        expect(coord1 == coord2).to be(false)
+      end
+    end
+
+    context 'when not equating against a coord' do
+      it 'raises an error' do
+        coord = described_class.new(15, 8)
+        expect { coord == 'cranberry' }.to raise_error('coord can only be equated to another coord')
+      end
+    end
+  end
 end
