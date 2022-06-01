@@ -1,15 +1,11 @@
-# frozen_string_literal: true
-
-# require all chess pieces
-pieces = %w[unoccupied pawn knight bishop rook queen king]
-pieces.each { |piece| require_relative "./piece/#{piece}" }
+require_relative './piece_factory'
 
 # class handling chess board info
 class Board
   attr_reader :board
 
   def initialize
-    @board = default_chess_board
+    @board = PieceFactory.default_chess_board
   end
 
   def display_board(board = colorized_board)
@@ -17,14 +13,6 @@ class Board
       row.each { |tile| print tile }
       puts
     end
-  end
-
-  def default_chess_board
-    [king_row_of_color('black'),
-     pawn_row_of_color('black'),
-     *Array.new(4) { empty_row },
-     pawn_row_of_color('white'),
-     king_row_of_color('white')]
   end
 
   private
@@ -37,20 +25,5 @@ class Board
       background_cycle.next
       row.map { |piece| piece.with_bg_color(background_cycle.next) }
     end
-  end
-
-  # array of classes for the first row of a chess board
-  def king_row_of_color(color)
-    [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook].map { |piece| piece.new(color) }
-  end
-
-  # array of a row of pawns
-  def pawn_row_of_color(color)
-    Array.new(8) { Pawn.new(color) }
-  end
-
-  # array of unoccupied classes
-  def empty_row
-    Array.new(8) { Unoccupied.new }
   end
 end
