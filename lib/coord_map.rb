@@ -31,6 +31,16 @@ class CoordMap
     @map.map! { |pair| pair + coord_pair }
   end
 
+  def ==(other)
+    return false if length != other.length
+
+    length.times do |i|
+      return false if coord_at_index(i).x != other.coord_at_index(i).x
+      return false if coord_at_index(i).y != other.coord_at_index(i).y
+    end
+    true
+  end
+
   def coord_at_index(index)
     @map[index]
   end

@@ -76,4 +76,33 @@ describe CoordMap do
       expect(condition).to be(true)
     end
   end
+
+  describe '#==' do
+    context 'when both maps are equal' do
+      it 'returns false' do
+        map1 = described_class.from_2d_array([[1, 2], [3, 5]])
+        map2 = described_class.from_2d_array([[1, 2], [3, 5]])
+
+        expect(map1 == map2).to be(true)
+      end
+    end
+
+    context 'when one map has more coords than the other' do
+      it 'returns false' do
+        map1 = described_class.from_2d_array([[4, 5], [123, 23]])
+        map2 = described_class.from_2d_array([[4, 5], [123, 23], [5, 3]])
+
+        expect(map1 == map2).to be(false)
+      end
+    end
+
+    context 'when same number of coords but coords values are different' do
+      it 'returns false' do
+        map1 = described_class.from_2d_array([[2, 34], [21, 33], [23, 4]])
+        map2 = described_class.from_2d_array([[23, 12], [12, 3], [32, 21]])
+
+        expect(map1 == map2).to be(false)
+      end
+    end
+  end
 end
