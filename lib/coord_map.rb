@@ -2,8 +2,6 @@ require_relative 'coord_pair'
 
 # A collection of coord pairs
 class CoordMap
-  attr_reader :map
-
   # create coord map from an array of coord pairs
   def initialize(coord_pair_array = [])
     raise 'argument must be a an array of coord pairs' unless coord_pair_array.is_a?(Array)
@@ -31,5 +29,17 @@ class CoordMap
   # add a coordinate pair to all pairs in coord map
   def all_add(coord_pair)
     @map.map! { |pair| pair + coord_pair }
+  end
+
+  def coord_at_index(index)
+    @map[index]
+  end
+
+  def length
+    @map.length
+  end
+
+  def each(&block)
+    @map.each(&block)
   end
 end

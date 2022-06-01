@@ -51,7 +51,7 @@ describe CoordMap do
 
     context 'with valid coord pair' do
       it 'adds another coord pair to coord map' do
-        expect { append_map.append(CoordPair.new(3, 2)) }.to change { append_map.map.length }.by(1)
+        expect { append_map.append(CoordPair.new(3, 2)) }.to change(append_map, :length).by(1)
       end
     end
 
@@ -69,9 +69,9 @@ describe CoordMap do
     it 'adds argument coord to each pair in map' do
       add_map.all_add(CoordPair.new(1, 2))
 
-      condition = add_map.map[0].x == 13 && add_map.map[0].y == 24 &&
-                  add_map.map[1].x == 34 && add_map.map[1].y == 56 &&
-                  add_map.map[2].x == 3  && add_map.map[2].y == -6
+      condition = add_map.coord_at_index(0).x == 13 && add_map.coord_at_index(0).y == 24 &&
+                  add_map.coord_at_index(1).x == 34 && add_map.coord_at_index(1).y == 56 &&
+                  add_map.coord_at_index(2).x == 3  && add_map.coord_at_index(2).y == -6
 
       expect(condition).to be(true)
     end
