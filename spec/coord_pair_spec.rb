@@ -1,4 +1,4 @@
-require_relative '../lib/coord_pair'
+require_relative '../lib/libraries'
 
 describe CoordPair do
   describe '#initialize' do

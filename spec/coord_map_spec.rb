@@ -1,5 +1,4 @@
-require_relative '../lib/coord_map'
-require_relative '../lib/coord_pair'
+require_relative '../lib/libraries'
 
 describe CoordMap do
   describe '#initialize' do
