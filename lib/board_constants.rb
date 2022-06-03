@@ -1,7 +1,3 @@
-# require all chess pieces
-pieces = %w[unoccupied pawn knight bishop rook queen king]
-pieces.each { |piece| require_relative "./piece/#{piece}" }
-
 # constant units for board class
 module BoardConstants
   # 2d array of pieces representing a normal chess board

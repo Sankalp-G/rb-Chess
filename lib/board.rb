@@ -1,5 +1,3 @@
-require_relative './board_constants'
-
 # class handling chess board info
 class Board
   include BoardConstants

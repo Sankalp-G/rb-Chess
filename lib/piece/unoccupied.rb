@@ -1,5 +1,3 @@
-require_relative '../piece'
-
 # class for empty tiles
 class Unoccupied < Piece
   def initialize(_color = nil)

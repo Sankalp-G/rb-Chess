@@ -1,5 +1,3 @@
-require 'colorize'
-
 # class containing chess piece class and common methods
 class Piece
   attr_reader :color

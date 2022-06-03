@@ -1,5 +1,3 @@
-require_relative 'coord_pair'
-
 # A collection of coord pairs
 class CoordMap
   # create coord map from an array of coord pairs
