@@ -1,11 +1,12 @@
-require_relative './piece_factory'
+require_relative './board_constants'
 
 # class handling chess board info
 class Board
+  include BoardConstants
   attr_reader :board
 
   def initialize
-    @board = PieceFactory.default_chess_board
+    @board = default_chess_board
   end
 
   def display_board(board = colorized_board)
