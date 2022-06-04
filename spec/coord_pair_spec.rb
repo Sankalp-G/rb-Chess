@@ -125,7 +125,7 @@ describe CoordPair do
 
     context 'when both coords are out of bounds' do
       it 'returns false' do
-        pair = described_class.new(4, -1)
+        pair = described_class.new(19, -12)
         expect(pair.in_bounds?).to be(false)
       end
     end
