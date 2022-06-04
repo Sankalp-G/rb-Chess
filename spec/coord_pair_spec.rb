@@ -100,4 +100,34 @@ describe CoordPair do
       end
     end
   end
+
+  describe '#in_bounds?' do
+    context 'when pair is in bounds' do
+      it 'returns true' do
+        pair = described_class.new(2, 3)
+        expect(pair.in_bounds?).to be(true)
+      end
+    end
+
+    context 'when x is out of bounds' do
+      it 'returns false' do
+        pair = described_class.new(8, 3)
+        expect(pair.in_bounds?).to be(false)
+      end
+    end
+
+    context 'when y is out of bounds' do
+      it 'returns false' do
+        pair = described_class.new(4, -1)
+        expect(pair.in_bounds?).to be(false)
+      end
+    end
+
+    context 'when both coords are out of bounds' do
+      it 'returns false' do
+        pair = described_class.new(4, -1)
+        expect(pair.in_bounds?).to be(false)
+      end
+    end
+  end
 end

@@ -13,6 +13,13 @@ class CoordPair
     CoordPair.new(coord_array[0], coord_array[1])
   end
 
+  # checks if coord is within the bounds of a chess board
+  def in_bounds?
+    return true if @x.between?(0, 7) && @y.between?(0, 7)
+
+    false
+  end
+
   def to_array
     [@x, @y]
   end
