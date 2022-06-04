@@ -7,6 +7,7 @@ require_relative 'board_constants'
 require_relative 'board'
 require_relative 'coord_pair'
 require_relative 'coord_map'
+require_relative 'move'
 
 # Pieces
 require_relative './piece/unoccupied'
