@@ -14,6 +14,13 @@ class Board
     end
   end
 
+  def piece_at_coord(coord_pair)
+    return nil if coord_pair.x.negative? || coord_pair.y.negative?
+    return nil if @board[coord_pair.x].nil?
+
+    @board[coord_pair.x][coord_pair.y]
+  end
+
   private
 
   # returns default colorized symbols and backgrounds from the board
