@@ -1,6 +1,6 @@
 # combination of several moves originating from the same coord
 class MoveMap
-  attr_reader :start_coord, :destination_coord_map, :moves
+  attr_reader :start_coord, :moves
 
   def initialize(start_coord, destination_coord_map)
     raise 'start_coord must be a coord pair' unless start_coord.is_a?(CoordPair)
@@ -12,6 +12,10 @@ class MoveMap
 
   def each_move(&block)
     @moves.each(&block)
+  end
+
+  def remove_friendly_fire(board)
+    @moves.filter! { |move| move.targeting_friendly?(board) }
   end
 
   private
