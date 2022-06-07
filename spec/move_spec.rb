@@ -7,7 +7,7 @@ describe Move do
         start_coord = 'mayonnaise'
         destination_coord = CoordPair.new(3, 2)
 
-        expect { described_class.new(start_coord, destination_coord) }.to raise_error('arguments must be coord pairs')
+        expect { described_class.new(start_coord, destination_coord) }.to raise_error('coord arguments must be coord pair')
       end
     end
   end
