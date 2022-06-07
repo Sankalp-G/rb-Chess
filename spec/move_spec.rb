@@ -31,4 +31,32 @@ describe Move do
       end
     end
   end
+
+  describe '#targeting_friendly?' do
+    let(:start_coord) { instance_double(CoordPair, is_a?: true) }
+    let(:destination_coord) { instance_double(CoordPair, is_a?: true) }
+    let(:board) { instance_double(Board) }
+
+    context 'when target is an ally' do
+      let(:start_piece) { instance_double(Piece, color: 'white') }
+      let(:target_piece) { instance_double(Piece, color: 'white') }
+
+      it 'returns true' do
+        allow(board).to receive(:piece_at_coord).and_return(start_piece, target_piece)
+        move = described_class.new(start_coord, destination_coord)
+        expect(move.targeting_friendly?(board)).to be(true)
+      end
+    end
+
+    context 'when target is not an ally' do
+      let(:start_piece) { instance_double(Piece, color: 'white') }
+      let(:target_piece) { instance_double(Piece, color: 'black') }
+
+      it 'returns false' do
+        allow(board).to receive(:piece_at_coord).and_return(start_piece, target_piece)
+        move = described_class.new(start_coord, destination_coord)
+        expect(move.targeting_friendly?(board)).to be(false)
+      end
+    end
+  end
 end

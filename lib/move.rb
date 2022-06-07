@@ -16,4 +16,11 @@ class Move
 
     false
   end
+
+  def targeting_friendly?(board)
+    start_piece = board.piece_at_coord(start_coord)
+    dest_piece = board.piece_at_coord(destination_coord)
+
+    start_piece.color == dest_piece.color
+  end
 end
