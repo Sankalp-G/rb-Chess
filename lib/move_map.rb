@@ -18,6 +18,15 @@ class MoveMap
     @moves.filter! { |move| move.targeting_friendly?(board) }
   end
 
+  def ==(other)
+    return false if @moves.length != other.moves.length
+
+    @moves.length.times do |i|
+      return false unless @moves[i] == other.moves[i]
+    end
+    true
+  end
+
   private
 
   def convert_to_moves(destination_coord_map)
