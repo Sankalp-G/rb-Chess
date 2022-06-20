@@ -21,4 +21,8 @@ class Move
 
     start_piece.color == dest_piece.color
   end
+
+  def ==(other)
+    @start_coord == other.start_coord && @destination_coord == other.destination_coord
+  end
 end

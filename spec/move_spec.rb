@@ -59,4 +59,22 @@ describe Move do
       end
     end
   end
+
+  describe '#==' do
+    context 'when moves are equal' do
+      it 'returns true' do
+        move1 = described_class.new(CoordPair.new(3, 4), CoordPair.new(5, 1))
+        move2 = described_class.new(CoordPair.new(3, 4), CoordPair.new(5, 1))
+        expect(move1 == move2).to be(true)
+      end
+    end
+
+    context 'when moves are not equal' do
+      it 'returns false' do
+        move1 = described_class.new(CoordPair.new(3, 4), CoordPair.new(2, -1))
+        move2 = described_class.new(CoordPair.new(3, 4), CoordPair.new(5, 1))
+        expect(move1 == move2).to be(false)
+      end
+    end
+  end
 end
