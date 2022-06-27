@@ -15,7 +15,8 @@ class MoveMap
   end
 
   def remove_friendly_fire(board)
-    @moves.filter! { |move| move.targeting_friendly?(board) }
+    @moves.filter! { |move| !move.targeting_friendly?(board) }
+    self
   end
 
   def ==(other)
