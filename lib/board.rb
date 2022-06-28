@@ -21,6 +21,10 @@ class Board
     @board[coord_pair.x][coord_pair.y]
   end
 
+  def place_object_at_coord(object, coord_pair)
+    @board[coord_pair.x][coord_pair.y] = object
+  end
+
   def moves_for_coord(coord_pair)
     piece = piece_at_coord(coord_pair)
     piece.get_valid_move_map(coord_pair, self)
