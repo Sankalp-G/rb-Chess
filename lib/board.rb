@@ -21,6 +21,11 @@ class Board
     @board[coord_pair.x][coord_pair.y]
   end
 
+  def moves_for_coord(coord_pair)
+    piece = piece_at_coord(coord_pair)
+    piece.get_valid_move_map(coord_pair, self)
+  end
+
   private
 
   # returns default colorized symbols and backgrounds from the board

@@ -16,9 +16,7 @@ describe Knight do
       end
 
       it 'returns move map with 8 moves' do
-        knight = board.instance_variable_get(:@board)[4][4]
-        knight_moves = knight.get_valid_move_map(start_coord, board)
-
+        knight_moves = board.moves_for_coord(start_coord)
         expect(knight_moves).to eq(expected_moves)
       end
     end
@@ -29,9 +27,7 @@ describe Knight do
       let(:expected_moves) { MoveMap.new(start_coord, expected_dest) }
 
       it 'returns move map with 2 moves' do
-        knight = board.instance_variable_get(:@board)[0][1]
-        knight_moves = knight.get_valid_move_map(start_coord, board)
-
+        knight_moves = board.moves_for_coord(start_coord)
         expect(knight_moves).to eq(expected_moves)
       end
     end
