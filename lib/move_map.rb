@@ -19,6 +19,11 @@ class MoveMap
     self
   end
 
+  def dest_coord_map
+    destination_coords = @moves.map(&:destination_coord)
+    CoordMap.new(destination_coords)
+  end
+
   def ==(other)
     return false if @moves.length != other.moves.length
 
