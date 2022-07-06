@@ -9,6 +9,10 @@ module BoardConstants
      king_row_of_color('white')]
   end
 
+  def blank_board
+    Array.new(8) { Array.new(8) { Unoccupied.new } }
+  end
+
   # array of classes for the first row of a chess board
   def king_row_of_color(color)
     [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook].map { |piece| piece.new(color) }

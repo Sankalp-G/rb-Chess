@@ -7,6 +7,15 @@ class Board
     @board = default_chess_board
   end
 
+  def clear_board
+    @board = blank_board
+    self
+  end
+
+  def self.new_blank_board
+    Board.new.clear_board
+  end
+
   def display_board(board = colorized_board)
     board.each do |row|
       row.each { |tile| print tile }
