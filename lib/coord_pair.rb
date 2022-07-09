@@ -24,6 +24,12 @@ class CoordPair
     [@x, @y]
   end
 
+  def offset_by(x_offset, y_offset)
+    @x += x_offset
+    @y += y_offset
+    self
+  end
+
   def +(other)
     raise 'coord can only be added to another coord' unless other.is_a?(CoordPair)
 

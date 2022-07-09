@@ -130,4 +130,13 @@ describe CoordPair do
       end
     end
   end
+
+  describe '#offset_by' do
+    subject(:offset_pair) { described_class.new(4, 1) }
+
+    it 'offsets coord by given values' do
+      result = offset_pair.offset_by(3, -5)
+      expect(result).to have_attributes(x: 7, y: -4)
+    end
+  end
 end
