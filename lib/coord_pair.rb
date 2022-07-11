@@ -25,9 +25,7 @@ class CoordPair
   end
 
   def offset_by(x_offset, y_offset)
-    @x += x_offset
-    @y += y_offset
-    self
+    CoordPair.new(@x + x_offset, @y + y_offset)
   end
 
   def +(other)
