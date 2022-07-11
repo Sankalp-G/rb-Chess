@@ -9,6 +9,7 @@ require_relative 'coord_pair'
 require_relative 'coord_map'
 require_relative 'move'
 require_relative 'move_map'
+require_relative 'path'
 
 # Pieces
 require_relative './piece/unoccupied'
