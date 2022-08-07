@@ -16,6 +16,9 @@ class Board
     Board.new.clear_board
   end
 
+  # placeholder for history object
+  def history; end
+
   def display_board(board = colorized_board)
     board.each do |row|
       row.each { |tile| print tile }

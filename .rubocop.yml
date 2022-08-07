@@ -5,3 +5,6 @@ Lint/MissingSuper:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false
