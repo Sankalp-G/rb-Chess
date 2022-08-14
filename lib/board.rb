@@ -1,14 +1,14 @@
 # class handling chess board info
 class Board
   include BoardConstants
-  attr_reader :board
+  attr_reader :board_arr
 
   def initialize
-    @board = default_chess_board
+    @board_arr = default_chess_board
   end
 
   def clear_board
-    @board = blank_board
+    @board_arr = blank_board
     self
   end
 
@@ -27,7 +27,7 @@ class Board
   end
 
   def find_coord_of_piece(piece)
-    @board.each_with_index do |row, row_index|
+    @board_arr.each_with_index do |row, row_index|
       col_index = row.index(piece)
       return CoordPair.new(row_index, col_index) unless col_index.nil?
     end
@@ -36,13 +36,13 @@ class Board
 
   def piece_at_coord(coord_pair)
     return nil if coord_pair.x.negative? || coord_pair.y.negative?
-    return nil if @board[coord_pair.x].nil?
+    return nil if @board_arr[coord_pair.x].nil?
 
-    @board[coord_pair.x][coord_pair.y]
+    @board_arr[coord_pair.x][coord_pair.y]
   end
 
   def place_object_at_coord(object, coord_pair)
-    @board[coord_pair.x][coord_pair.y] = object
+    @board_arr[coord_pair.x][coord_pair.y] = object
   end
 
   def moves_for_coord(coord_pair)
@@ -56,7 +56,7 @@ class Board
   def colorized_board
     background_cycle = %w[red blue].cycle
 
-    @board.map do |row|
+    @board_arr.map do |row|
       background_cycle.next
       row.map { |piece| piece.with_bg_color(background_cycle.next) }
     end
