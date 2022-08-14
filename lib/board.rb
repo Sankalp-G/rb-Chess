@@ -1,10 +1,11 @@
 # class handling chess board info
 class Board
   include BoardConstants
-  attr_reader :board_arr
+  attr_reader :board_arr, :history
 
   def initialize
     @board_arr = default_chess_board
+    @history = History.new
   end
 
   def clear_board
@@ -23,8 +24,9 @@ class Board
     board_clone
   end
 
-  # placeholder for history object
-  def history; end
+  def save_to_history
+    @history.save_board(self)
+  end
 
   def display_board(board = colorized_board)
     board.each do |row|
