@@ -32,4 +32,27 @@ describe Board do
       end
     end
   end
+
+  describe '#find_coord_of_piece' do
+    context 'when given piece exists' do
+      let(:target_coord) { CoordPair.new(1, 3) }
+      let(:board) { described_class.new }
+
+      it 'returns coordinates of given piece' do
+        piece = board.piece_at_coord(target_coord)
+        result_coord = board.find_coord_of_piece(piece)
+        expect(result_coord).to eq(target_coord)
+      end
+    end
+
+    context 'when given piece does not exit' do
+      let(:board) { described_class.new }
+
+      it 'returns nil' do
+        piece = Knight.new('black')
+        result = board.find_coord_of_piece(piece)
+        expect(result).to be_nil
+      end
+    end
+  end
 end

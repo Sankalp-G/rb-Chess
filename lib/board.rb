@@ -26,6 +26,14 @@ class Board
     end
   end
 
+  def find_coord_of_piece(piece)
+    @board.each_with_index do |row, row_index|
+      col_index = row.index(piece)
+      return CoordPair.new(row_index, col_index) unless col_index.nil?
+    end
+    nil
+  end
+
   def piece_at_coord(coord_pair)
     return nil if coord_pair.x.negative? || coord_pair.y.negative?
     return nil if @board[coord_pair.x].nil?
