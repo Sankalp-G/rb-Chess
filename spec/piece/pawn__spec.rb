@@ -2,8 +2,8 @@ require_relative '../../lib/libraries'
 
 describe Pawn do
   let(:board) { Board.new }
-  let(:unmoved_history) { double('unmoved_history', has_piece_moved: false) }
-  let(:moved_history) { double('moved_history', has_piece_moved: true) }
+  let(:unmoved_history) { double('unmoved_history', piece_moved?: false) }
+  let(:moved_history) { double('moved_history', piece_moved?: true) }
 
   describe '#get_valid_move_map' do
     context 'when pawn is at the initial position' do

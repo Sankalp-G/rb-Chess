@@ -32,7 +32,7 @@ class Pawn < Piece
   end
 
   def leap_coord(start_coord, board)
-    return nil if board.history.has_piece_moved(self)
+    return nil if board.history.piece_moved?(self)
 
     possible_coord = start_coord.offset_by(direction_multiplier * 2, 0)
     return possible_coord if step_coord(start_coord, board) && board.piece_at_coord(possible_coord).is_a?(Unoccupied)
