@@ -3,6 +3,7 @@ require 'colorize'
 
 # Internal
 require_relative 'piece'
+require_relative 'history'
 require_relative 'board_constants'
 require_relative 'board'
 require_relative 'coord_pair'
