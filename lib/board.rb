@@ -16,6 +16,13 @@ class Board
     Board.new.clear_board
   end
 
+  def clone
+    board_arr_clone = @board_arr.map(&:clone)
+    board_clone = Board.new
+    board_clone.instance_variable_set(:@board_arr, board_arr_clone)
+    board_clone
+  end
+
   # placeholder for history object
   def history; end
 
