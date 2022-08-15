@@ -14,4 +14,8 @@ class Piece
   def with_bg_color(color)
     colored_symbol.colorize(background: color.to_sym)
   end
+
+  def get_valid_move_map(start_coord, _board)
+    MoveMap.new(start_coord, CoordMap.from_2d_array([]))
+  end
 end
