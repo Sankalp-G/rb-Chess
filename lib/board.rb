@@ -71,6 +71,18 @@ class Board
     false
   end
 
+  def kings
+    @board_arr.flatten.select { |piece| piece.is_a?(King) }
+  end
+
+  def check
+    kings.each do |king|
+      king_coord = find_coord_of_piece(king)
+      return king.color if coord_is_targeted?(king_coord)
+    end
+    nil
+  end
+
   private
 
   # returns default colorized symbols and backgrounds from the board

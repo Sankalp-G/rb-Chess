@@ -84,4 +84,38 @@ describe Board do
       end
     end
   end
+
+  describe '#check?' do
+    subject(:check_board) { described_class.new }
+
+    before do
+      check_board.save_to_history
+    end
+
+    context 'when kings are not targeted' do
+      it 'returns nil' do
+        expect(check_board.check).to be_nil
+      end
+    end
+
+    context 'when black king is targeted' do
+      before do
+        check_board.place_object_at_coord(Rook.new('white'), CoordPair.new(1, 4))
+      end
+
+      it 'returns "black"' do
+        expect(check_board.check).to eql('black')
+      end
+    end
+
+    context 'when white king is targeted' do
+      before do
+        check_board.place_object_at_coord(Bishop.new('black'), CoordPair.new(6, 5))
+      end
+
+      it 'returns "white"' do
+        expect(check_board.check).to eql('white')
+      end
+    end
+  end
 end
