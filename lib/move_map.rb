@@ -33,6 +33,11 @@ class MoveMap
     true
   end
 
+  def can_target_coord?(coord)
+    dest_coord_map.each { |dest_coord| return true if dest_coord == coord }
+    false
+  end
+
   private
 
   def convert_to_moves(destination_coord_map)
