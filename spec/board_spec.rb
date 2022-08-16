@@ -55,4 +55,33 @@ describe Board do
       end
     end
   end
+
+  describe '#coord_is_targeted?' do
+    subject(:target_board) { described_class.new }
+
+    before do
+      target_board.save_to_history # since pawn moves rely on history
+    end
+
+    context 'when coord is being targeted' do
+      it 'returns true when coord is unoccupied' do
+        coord = CoordPair.new(2, 5)
+        expect(target_board.coord_is_targeted?(coord)).to be(true)
+      end
+
+      it 'returns true when coord is occupied' do
+        coord = CoordPair.new(5, 2)
+        target_board.place_object_at_coord(Bishop.new('black'), coord)
+        expect(target_board.coord_is_targeted?(coord)).to be(true)
+      end
+    end
+
+    context 'when coord is not targeted' do
+      it 'returns false' do
+        coord = CoordPair.new(4, 4)
+        target_board.place_object_at_coord(Knight.new('black'), coord)
+        expect(target_board.coord_is_targeted?(coord)).to be(false)
+      end
+    end
+  end
 end
