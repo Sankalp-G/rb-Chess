@@ -77,4 +77,23 @@ describe Move do
       end
     end
   end
+
+  describe '#execute_on_board' do
+    let(:execute_board) { Board.new }
+    let(:start_coord) { CoordPair.new(6, 3) }
+    let(:dest_coord) { CoordPair.new(4, 3) }
+
+    before do
+      move = described_class.new(start_coord, dest_coord)
+      move.execute_on_board(execute_board)
+    end
+
+    it 'clears out start tile' do
+      expect(execute_board.piece_at_coord(start_coord)).to be_an(Unoccupied)
+    end
+
+    it 'moves piece to destination' do
+      expect(execute_board.piece_at_coord(dest_coord)).to be_a(Pawn)
+    end
+  end
 end
