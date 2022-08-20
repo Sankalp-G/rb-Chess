@@ -7,6 +7,7 @@ class Bishop < Piece
   def get_valid_move_map(start_coord, board)
     dest_coords = valid_dest_coord_map(start_coord, board)
     MoveMap.new(start_coord, dest_coords)
+           .remove_friendly_fire(board)
   end
 
   def valid_dest_coord_map(start_coord, board)

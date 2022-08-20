@@ -7,6 +7,7 @@ class Pawn < Piece
   def get_valid_move_map(start_coord, board)
     destination_coord_map = CoordMap.new(all_destination_coords(start_coord, board))
     MoveMap.new(start_coord, destination_coord_map)
+           .remove_friendly_fire(board)
   end
 
   private
