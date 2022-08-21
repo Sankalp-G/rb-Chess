@@ -96,4 +96,30 @@ describe Move do
       expect(execute_board.piece_at_coord(dest_coord)).to be_a(Pawn)
     end
   end
+
+  describe '#endangers_king' do
+    let(:danger_board) { Board.new_blank_board }
+
+    before do
+      danger_board.place_object_at_coord(King.new('white'), CoordPair.new(3, 1))
+      danger_board.place_object_at_coord(Rook.new('white'), CoordPair.new(3, 2))
+      danger_board.place_object_at_coord(Rook.new('black'), CoordPair.new(3, 6))
+      danger_board.place_object_at_coord(King.new('black'), CoordPair.new(3, 7))
+    end
+
+    it 'returns true if own king is in danger after move' do
+      dangerous_move = described_class.new(CoordPair.new(3, 2), CoordPair.new(5, 2))
+      expect(dangerous_move.endangers_king?(danger_board)).to be(true)
+    end
+
+    it 'returns false if own king is not in danger after move' do
+      safe_move = described_class.new(CoordPair.new(3, 2), CoordPair.new(3, 4))
+      expect(safe_move.endangers_king?(danger_board)).to be(false)
+    end
+
+    it 'returns false if opponent king is endangered' do
+      move = described_class.new(CoordPair.new(3, 2), CoordPair.new(3, 6))
+      expect(move.endangers_king?(danger_board)).to be(false)
+    end
+  end
 end

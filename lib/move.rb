@@ -28,6 +28,15 @@ class Move
     start_piece.color == dest_piece.color
   end
 
+  def endangers_king?(board)
+    moving_piece = board.piece_at_coord(@start_coord)
+    test_board = board.clone
+    execute_on_board(test_board)
+    return true if test_board.check == moving_piece.color
+
+    false
+  end
+
   def ==(other)
     @start_coord == other.start_coord && @destination_coord == other.destination_coord
   end
