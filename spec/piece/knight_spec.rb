@@ -1,7 +1,7 @@
 require_relative '../../lib/libraries'
 
 describe Knight do
-  describe '#get_valid_move_map' do
+  describe '#valid_move_map' do
     subject(:knight) { described_class.new('blank') }
 
     let(:board) { Board.new }

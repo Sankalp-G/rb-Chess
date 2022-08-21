@@ -5,7 +5,7 @@ describe Pawn do
   let(:unmoved_history) { double('unmoved_history', piece_moved?: false) }
   let(:moved_history) { double('moved_history', piece_moved?: true) }
 
-  describe '#get_valid_move_map' do
+  describe '#valid_move_map' do
     context 'when pawn is at the initial position' do
       before do
         allow(board).to receive(:history).and_return(unmoved_history)

@@ -56,14 +56,14 @@ class Board
 
   def moves_for_coord(coord_pair)
     piece = piece_at_coord(coord_pair)
-    piece.get_valid_move_map(coord_pair, self)
+    piece.valid_move_map(coord_pair, self)
   end
 
   def coord_is_targeted?(coord)
     @board_arr.each_with_index do |row, row_index|
       row.each_with_index do |piece, col_index|
         piece_coord = CoordPair.new(row_index, col_index)
-        moves = piece.get_valid_move_map(piece_coord, self)
+        moves = piece.valid_move_map(piece_coord, self)
 
         return true if moves.can_target_coord?(coord)
       end

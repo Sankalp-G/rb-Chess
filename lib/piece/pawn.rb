@@ -4,13 +4,9 @@ class Pawn < Piece
     '♟'
   end
 
-  def get_valid_move_map(start_coord, board)
-    destination_coord_map = CoordMap.new(all_destination_coords(start_coord, board))
-    MoveMap.new(start_coord, destination_coord_map)
-           .remove_friendly_fire(board)
+  def dest_coord_map(start_coord, board)
+    CoordMap.new(all_destination_coords(start_coord, board))
   end
-
-  private
 
   def all_destination_coords(start_coord, board)
     [step_coord(start_coord, board), leap_coord(start_coord, board),

@@ -15,7 +15,12 @@ class Piece
     colored_symbol.colorize(background: color.to_sym)
   end
 
-  def get_valid_move_map(start_coord, _board)
-    MoveMap.new(start_coord, CoordMap.from_2d_array([]))
+  def valid_move_map(start_coord, board)
+    MoveMap.new(start_coord, dest_coord_map(start_coord, board))
+           .remove_friendly_fire(board)
+  end
+
+  def dest_coord_map(_start_coord, _board)
+    CoordMap.from_2d_array([])
   end
 end
