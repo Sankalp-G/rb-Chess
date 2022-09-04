@@ -5,7 +5,7 @@ class Board
 
   def initialize
     @board_arr = default_chess_board
-    @history = History.new
+    @history = History.new(self)
   end
 
   def clear_board

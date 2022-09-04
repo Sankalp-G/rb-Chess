@@ -1,7 +1,8 @@
 # saves previous board states as history
 class History
-  def initialize
+  def initialize(initial_board = nil)
     @history_arr = []
+    @history_arr << initial_board unless initial_board.nil?
   end
 
   def save_board(board)
