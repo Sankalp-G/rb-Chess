@@ -71,6 +71,18 @@ class Board
     false
   end
 
+  def limited_coord_is_targeted?(coord)
+    @board_arr.each_with_index do |row, row_index|
+      row.each_with_index do |piece, col_index|
+        piece_coord = CoordPair.new(row_index, col_index)
+        moves = piece.limited_move_map(piece_coord, self)
+
+        return true if moves.can_target_coord?(coord)
+      end
+    end
+    false
+  end
+
   def kings
     @board_arr.flatten.select { |piece| piece.is_a?(King) }
   end
@@ -78,7 +90,7 @@ class Board
   def check
     kings.each do |king|
       king_coord = find_coord_of_piece(king)
-      return king.color if coord_is_targeted?(king_coord)
+      return king.color if limited_coord_is_targeted?(king_coord)
     end
     nil
   end
