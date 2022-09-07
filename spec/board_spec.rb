@@ -59,10 +59,6 @@ describe Board do
   describe '#coord_is_targeted?' do
     subject(:target_board) { described_class.new }
 
-    before do
-      target_board.save_to_history # since pawn moves rely on history
-    end
-
     context 'when coord is being targeted' do
       it 'returns true when coord is unoccupied' do
         coord = CoordPair.new(2, 5)
@@ -87,10 +83,6 @@ describe Board do
 
   describe '#check?' do
     subject(:check_board) { described_class.new }
-
-    before do
-      check_board.save_to_history
-    end
 
     context 'when kings are not targeted' do
       it 'returns nil' do
