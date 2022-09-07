@@ -60,15 +60,7 @@ class Board
   end
 
   def coord_is_targeted?(coord)
-    @board_arr.each_with_index do |row, row_index|
-      row.each_with_index do |piece, col_index|
-        piece_coord = CoordPair.new(row_index, col_index)
-        moves = piece.valid_move_map(piece_coord, self)
-
-        return true if moves.can_target_coord?(coord)
-      end
-    end
-    false
+    all_moves_arr.any? { |move| move.can_target_coord?(coord) }
   end
 
   def limited_coord_is_targeted?(coord)
@@ -93,6 +85,17 @@ class Board
       return king.color if limited_coord_is_targeted?(king_coord)
     end
     nil
+  end
+
+  def all_moves_arr
+    move_map_arr = []
+    @board_arr.each_with_index do |row, row_index|
+      row.each_with_index do |piece, col_index|
+        piece_coord = CoordPair.new(row_index, col_index)
+        move_map_arr << piece.valid_move_map(piece_coord, self)
+      end
+    end
+    move_map_arr
   end
 
   private
