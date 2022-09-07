@@ -19,6 +19,11 @@ class MoveMap
     self
   end
 
+  def remove_self_checks(board)
+    @moves_arr.filter! { |move| !move.endangers_king?(board) }
+    self
+  end
+
   def dest_coord_map
     destination_coords = @moves_arr.map(&:destination_coord)
     CoordMap.new(destination_coords)
