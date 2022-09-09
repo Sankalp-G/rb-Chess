@@ -11,6 +11,7 @@ require_relative 'coord_map'
 require_relative 'move'
 require_relative 'move_map'
 require_relative 'path'
+require_relative 'chess'
 
 # Pieces
 require_relative './piece/unoccupied'
