@@ -1,16 +1,14 @@
 require_relative '../lib/libraries'
 
 describe Chess do
-  subject(:chess_game) { described_class.new }
+  subject(:chess_game) { described_class.new.new_game }
 
   describe '#checkmate?' do
     it 'returns false when there is no checkmate' do
-      chess_game.new_game
       expect(chess_game.checkmate?).to be(false)
     end
 
     it 'returns false when there is a check but no checkmate' do
-      chess_game.new_game
       check_board = Board.new
       check_board.place_object_at_coord(Queen.new('black'), CoordPair.new(6, 4))
       chess_game.instance_variable_set(:@board, check_board)
@@ -23,7 +21,6 @@ describe Chess do
       before do
         checkmate_board.place_object_at_coord(Queen.new('black'), CoordPair.new(6, 4))
         checkmate_board.place_object_at_coord(Queen.new('black'), CoordPair.new(7, 5))
-        chess_game.new_game
         chess_game.instance_variable_set(:@board, checkmate_board)
       end
 
@@ -36,7 +33,6 @@ describe Chess do
   describe '#stalemate' do
     context 'when there is no stalemate' do
       it 'returns false' do
-        chess_game.new_game
         expect(chess_game.stalemate?).to be(false)
       end
     end
@@ -48,7 +44,6 @@ describe Chess do
         stale_board.place_object_at_coord(King.new('black'), CoordPair.new(0, 0))
         stale_board.place_object_at_coord(Queen.new('black'), CoordPair.new(6, 5))
         stale_board.place_object_at_coord(King.new('white'), CoordPair.new(7, 7))
-        chess_game.new_game
         chess_game.instance_variable_set(:@board, stale_board)
       end
 
