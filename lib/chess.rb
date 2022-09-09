@@ -24,6 +24,11 @@ class Chess
     true
   end
 
+  def stalemate?
+    move_map_arr_for_player(@active_player)
+      .all? { |move_map| move_map.moves_arr.empty? }
+  end
+
   def move_map_arr_for_player(player_color)
     @board.all_moves_arr.filter do |move_map|
       move_piece = @board.piece_at_coord(move_map.start_coord)

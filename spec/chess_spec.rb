@@ -32,4 +32,29 @@ describe Chess do
       end
     end
   end
+
+  describe '#stalemate' do
+    context 'when there is no stalemate' do
+      it 'returns false' do
+        chess_game.new_game
+        expect(chess_game.stalemate?).to be(false)
+      end
+    end
+
+    context 'when there is a stalemate' do
+      let(:stale_board) { Board.new_blank_board }
+
+      before do
+        stale_board.place_object_at_coord(King.new('black'), CoordPair.new(0, 0))
+        stale_board.place_object_at_coord(Queen.new('black'), CoordPair.new(6, 5))
+        stale_board.place_object_at_coord(King.new('white'), CoordPair.new(7, 7))
+        chess_game.new_game
+        chess_game.instance_variable_set(:@board, stale_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game.stalemate?).to be(true)
+      end
+    end
+  end
 end
