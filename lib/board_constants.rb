@@ -2,11 +2,11 @@
 module BoardConstants
   # 2d array of pieces representing a normal chess board
   def default_chess_board
-    [king_row_of_color('black'),
-     pawn_row_of_color('black'),
+    [king_row_of_color(:black),
+     pawn_row_of_color(:black),
      *Array.new(4) { empty_row },
-     pawn_row_of_color('white'),
-     king_row_of_color('white')]
+     pawn_row_of_color(:white),
+     king_row_of_color(:white)]
   end
 
   def blank_board

@@ -49,7 +49,7 @@ describe Board do
       let(:board) { described_class.new }
 
       it 'returns nil' do
-        piece = Knight.new('black')
+        piece = Knight.new(:black)
         result = board.find_coord_of_piece(piece)
         expect(result).to be_nil
       end
@@ -67,7 +67,7 @@ describe Board do
 
       it 'returns true when coord is occupied' do
         coord = CoordPair.new(5, 2)
-        target_board.place_object_at_coord(Bishop.new('black'), coord)
+        target_board.place_object_at_coord(Bishop.new(:black), coord)
         expect(target_board.coord_is_targeted?(coord)).to be(true)
       end
     end
@@ -75,7 +75,7 @@ describe Board do
     context 'when coord is not targeted' do
       it 'returns false' do
         coord = CoordPair.new(4, 4)
-        target_board.place_object_at_coord(Knight.new('black'), coord)
+        target_board.place_object_at_coord(Knight.new(:black), coord)
         expect(target_board.coord_is_targeted?(coord)).to be(false)
       end
     end
@@ -92,21 +92,21 @@ describe Board do
 
     context 'when black king is targeted' do
       before do
-        check_board.place_object_at_coord(Rook.new('white'), CoordPair.new(1, 4))
+        check_board.place_object_at_coord(Rook.new(:white), CoordPair.new(1, 4))
       end
 
       it 'returns "black"' do
-        expect(check_board.check).to eql('black')
+        expect(check_board.check).to eql(:black)
       end
     end
 
     context 'when white king is targeted' do
       before do
-        check_board.place_object_at_coord(Bishop.new('black'), CoordPair.new(6, 5))
+        check_board.place_object_at_coord(Bishop.new(:black), CoordPair.new(6, 5))
       end
 
       it 'returns "white"' do
-        expect(check_board.check).to eql('white')
+        expect(check_board.check).to eql(:white)
       end
     end
   end

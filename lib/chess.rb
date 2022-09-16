@@ -1,13 +1,13 @@
 # class dictating main game flow
 class Chess
   def new_game
-    @active_player = 'white'
+    @active_player = :white
     @board = Board.new
     self
   end
 
   def switch_player
-    @active_player == 'white' ? 'black' : 'white'
+    @active_player == :white ? :black : :white
   end
 
   def checkmate?

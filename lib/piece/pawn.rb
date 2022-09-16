@@ -16,8 +16,8 @@ class Pawn < Piece
 
   def direction_multiplier
     case @color
-    when 'black' then 1
-    when 'white' then -1
+    when :black then 1
+    when :white then -1
     end
   end
 

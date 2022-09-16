@@ -34,11 +34,11 @@ describe Pawn do
 
       before do
         allow(board).to receive(:history).and_return(moved_history)
-        board.place_object_at_coord(described_class.new('white'), pawn_coord)
+        board.place_object_at_coord(described_class.new(:white), pawn_coord)
       end
 
       it 'returns no moves when enemy is front' do
-        board.place_object_at_coord(Knight.new('black'), CoordPair.new(4, 4))
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(4, 4))
 
         expected_coords = CoordMap.from_2d_array([])
         expect(pawn_dest_coords).to eq(expected_coords)
@@ -50,15 +50,15 @@ describe Pawn do
       end
 
       it 'returns 2 moves when enemy is on the left' do
-        board.place_object_at_coord(Knight.new('black'), CoordPair.new(4, 3))
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(4, 3))
 
         expected_coords = CoordMap.from_2d_array([[4, 4], [4, 3]])
         expect(pawn_dest_coords).to eq(expected_coords)
       end
 
       it 'returns 3 moves when enemies are on both sides' do
-        board.place_object_at_coord(Knight.new('black'), CoordPair.new(4, 3))
-        board.place_object_at_coord(Knight.new('black'), CoordPair.new(4, 5))
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(4, 3))
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(4, 5))
 
         expected_coords = CoordMap.from_2d_array([[4, 4], [4, 3], [4, 5]])
         expect(pawn_dest_coords).to eq(expected_coords)

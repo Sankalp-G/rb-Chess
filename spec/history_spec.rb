@@ -8,7 +8,7 @@ describe History do
   describe '#save_board' do
     before do
       history.save_board(board)
-      board.place_object_at_coord(Pawn.new('white'), CoordPair.new(4, 4))
+      board.place_object_at_coord(Pawn.new(:white), CoordPair.new(4, 4))
       history.save_board(board)
     end
 

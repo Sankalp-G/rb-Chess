@@ -38,8 +38,8 @@ describe Move do
     let(:board) { instance_double(Board) }
 
     context 'when target is an ally' do
-      let(:start_piece) { instance_double(Piece, color: 'white') }
-      let(:target_piece) { instance_double(Piece, color: 'white') }
+      let(:start_piece) { instance_double(Piece, color: :white) }
+      let(:target_piece) { instance_double(Piece, color: :white) }
 
       it 'returns true' do
         allow(board).to receive(:piece_at_coord).and_return(start_piece, target_piece)
@@ -49,8 +49,8 @@ describe Move do
     end
 
     context 'when target is not an ally' do
-      let(:start_piece) { instance_double(Piece, color: 'white') }
-      let(:target_piece) { instance_double(Piece, color: 'black') }
+      let(:start_piece) { instance_double(Piece, color: :white) }
+      let(:target_piece) { instance_double(Piece, color: :black) }
 
       it 'returns false' do
         allow(board).to receive(:piece_at_coord).and_return(start_piece, target_piece)
@@ -101,10 +101,10 @@ describe Move do
     let(:danger_board) { Board.new_blank_board }
 
     before do
-      danger_board.place_object_at_coord(King.new('white'), CoordPair.new(3, 1))
-      danger_board.place_object_at_coord(Rook.new('white'), CoordPair.new(3, 2))
-      danger_board.place_object_at_coord(Rook.new('black'), CoordPair.new(3, 6))
-      danger_board.place_object_at_coord(King.new('black'), CoordPair.new(3, 7))
+      danger_board.place_object_at_coord(King.new(:white), CoordPair.new(3, 1))
+      danger_board.place_object_at_coord(Rook.new(:white), CoordPair.new(3, 2))
+      danger_board.place_object_at_coord(Rook.new(:black), CoordPair.new(3, 6))
+      danger_board.place_object_at_coord(King.new(:black), CoordPair.new(3, 7))
     end
 
     it 'returns true if own king is in danger after move' do
