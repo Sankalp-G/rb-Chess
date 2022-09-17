@@ -1,6 +1,7 @@
 # describes point to point(s) movement on the chess board
 class Move
   attr_reader :start_coord, :destination_coord
+  attr_accessor :secondary_move
 
   def initialize(start_coord, destination_coord)
     raise 'coord arguments must be coord pair' unless start_coord.is_a?(CoordPair) && destination_coord.is_a?(CoordPair)
@@ -11,6 +12,8 @@ class Move
 
   def execute_on_board(board)
     board.move_piece_from_to(@start_coord, @destination_coord)
+
+    secondary_move&.execute_on_board(board)
   end
 
   def in_bounds?
