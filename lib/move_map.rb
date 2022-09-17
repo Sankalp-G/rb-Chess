@@ -26,6 +26,11 @@ class MoveMap
     CoordMap.new(destination_coords)
   end
 
+  def can_target_coord?(coord)
+    dest_coord_map.each { |dest_coord| return true if dest_coord == coord }
+    false
+  end
+
   def ==(other)
     return false if @moves_arr.length != other.moves_arr.length
 
@@ -35,9 +40,8 @@ class MoveMap
     true
   end
 
-  def can_target_coord?(coord)
-    dest_coord_map.each { |dest_coord| return true if dest_coord == coord }
-    false
+  def append(move)
+    @moves_arr << move
   end
 
   private
