@@ -54,6 +54,12 @@ class Board
     @board_arr[coord_pair.x][coord_pair.y] = object
   end
 
+  def move_piece_from_to(start_coord, destination_coord)
+    moving_piece = piece_at_coord(start_coord)
+    place_object_at_coord(Unoccupied.new, start_coord)
+    place_object_at_coord(moving_piece, destination_coord)
+  end
+
   def moves_for_coord(coord_pair)
     piece = piece_at_coord(coord_pair)
     piece.valid_move_map(coord_pair, self)

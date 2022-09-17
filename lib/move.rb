@@ -10,9 +10,7 @@ class Move
   end
 
   def execute_on_board(board)
-    moving_piece = board.piece_at_coord(@start_coord)
-    board.place_object_at_coord(Unoccupied.new, @start_coord)
-    board.place_object_at_coord(moving_piece, @destination_coord)
+    board.move_piece_from_to(@start_coord, @destination_coord)
   end
 
   def in_bounds?
