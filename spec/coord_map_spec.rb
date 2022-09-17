@@ -1,46 +1,12 @@
 require_relative '../lib/libraries'
 
 describe CoordMap do
-  describe '#initialize' do
-    context 'with valid coord pair array' do
-      it 'creates an object' do
-        coord_pair_array = [CoordPair.new(1, 2), CoordPair.new(-21, 22), CoordPair.new(1, 54)]
-        new_object = described_class.new(coord_pair_array)
-        expect(new_object).to be_instance_of(described_class)
-      end
-    end
-
-    context 'when argument is not an array' do
-      it 'raises an error' do
-        invalid_arg = 'apple pie'
-        expect { described_class.new(invalid_arg) }
-          .to raise_error('argument must be a an array of coord pairs')
-      end
-    end
-
-    context 'when array elements aren\'t coord pairs' do
-      it 'raises an error' do
-        invalid_array = ['a', [1, 2], 23, 55]
-        expect { described_class.new(invalid_array) }
-          .to raise_error('array must only contain coord pair objects')
-      end
-    end
-  end
-
   describe '#from_2d_array' do
     context 'with valid 2d array' do
       it 'creates an object' do
         valid_arg = [[1, 2], [33, 12], [-2, 233], [12, -33]]
         new_object = described_class.from_2d_array(valid_arg)
         expect(new_object).to be_instance_of(described_class)
-      end
-    end
-
-    context 'when argument is not an array' do
-      it 'raises an error' do
-        invalid_arg = 'pineapple_pie'
-        expect { described_class.from_2d_array(invalid_arg) }
-          .to raise_error('argument must be a an array of coord sub arrays')
       end
     end
   end
@@ -51,13 +17,6 @@ describe CoordMap do
     context 'with valid coord pair' do
       it 'adds another coord pair to coord map' do
         expect { append_map.append(CoordPair.new(3, 2)) }.to change(append_map, :length).by(1)
-      end
-    end
-
-    context 'when argument is not a coord pair' do
-      it 'raises an error' do
-        bad_arg = 'tomato_sauce'
-        expect { append_map.append(bad_arg) }.to raise_error('can only append coord pair object')
       end
     end
   end

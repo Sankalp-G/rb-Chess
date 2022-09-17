@@ -4,8 +4,6 @@ class Move
   attr_accessor :secondary_move
 
   def initialize(start_coord, destination_coord)
-    raise 'coord arguments must be coord pair' unless start_coord.is_a?(CoordPair) && destination_coord.is_a?(CoordPair)
-
     @start_coord = start_coord
     @destination_coord = destination_coord
   end

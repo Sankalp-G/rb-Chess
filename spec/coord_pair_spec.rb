@@ -8,12 +8,6 @@ describe CoordPair do
         expect(new_coord).to have_attributes(x: 2, y: -7)
       end
     end
-
-    context 'with non numeric coord arguments' do
-      it 'raises an error' do
-        expect { described_class.new(2, 'apple') }.to raise_error('coordinates must be a number')
-      end
-    end
   end
 
   describe '#from_array' do
@@ -51,15 +45,6 @@ describe CoordPair do
         expect(result_coord).to have_attributes(x: 21, y: -6)
       end
     end
-
-    context 'when adding something other than a coord' do
-      let(:operand1) { described_class.new(3, 4) }
-      let(:operand2) { 'beep boop' }
-
-      it 'raises an error' do
-        expect { operand1 + operand2 }.to raise_error('coord can only be added to another coord')
-      end
-    end
   end
 
   describe '#==' do
@@ -90,13 +75,6 @@ describe CoordPair do
         coord1 = described_class.new(32, 5)
         coord2 = described_class.new(-11, 36)
         expect(coord1 == coord2).to be(false)
-      end
-    end
-
-    context 'when not equating against a coord' do
-      it 'raises an error' do
-        coord = described_class.new(15, 8)
-        expect { coord == 'cranberry' }.to raise_error('coord can only be equated to another coord')
       end
     end
   end

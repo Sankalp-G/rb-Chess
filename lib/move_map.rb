@@ -3,9 +3,6 @@ class MoveMap
   attr_reader :start_coord, :moves_arr
 
   def initialize(start_coord, destination_coord_map)
-    raise 'start_coord must be a coord pair' unless start_coord.is_a?(CoordPair)
-    raise 'destination map must be a coord map' unless destination_coord_map.is_a?(CoordMap)
-
     @start_coord = start_coord
     @moves_arr = convert_to_moves(destination_coord_map)
   end

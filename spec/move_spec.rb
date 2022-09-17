@@ -1,22 +1,11 @@
 require_relative '../lib/libraries'
 
 describe Move do
-  describe 'initialize' do
-    context 'when coord arguments are not coord pairs' do
-      it 'raises an error' do
-        start_coord = 'mayonnaise'
-        destination_coord = CoordPair.new(3, 2)
-
-        expect { described_class.new(start_coord, destination_coord) }.to raise_error('coord arguments must be coord pair')
-      end
-    end
-  end
-
   describe 'in_bounds?' do
     context 'when both coord pairs are in bounds' do
       it 'returns true' do
-        start_coord = instance_double(CoordPair, { in_bounds?: true, is_a?: true })
-        destination_coord = instance_double(CoordPair, { in_bounds?: true, is_a?: true })
+        start_coord = instance_double(CoordPair, { in_bounds?: true })
+        destination_coord = instance_double(CoordPair, { in_bounds?: true })
         move = described_class.new(start_coord, destination_coord)
         expect(move.in_bounds?).to be(true)
       end
@@ -24,8 +13,8 @@ describe Move do
 
     context 'when any coord pair is out of bounds' do
       it 'returns true' do
-        start_coord = instance_double(CoordPair, { in_bounds?: false, is_a?: true })
-        destination_coord = instance_double(CoordPair, { in_bounds?: true, is_a?: true })
+        start_coord = instance_double(CoordPair, { in_bounds?: false })
+        destination_coord = instance_double(CoordPair, { in_bounds?: true })
         move = described_class.new(start_coord, destination_coord)
         expect(move.in_bounds?).to be(false)
       end
@@ -33,8 +22,8 @@ describe Move do
   end
 
   describe '#targeting_friendly?' do
-    let(:start_coord) { instance_double(CoordPair, is_a?: true) }
-    let(:destination_coord) { instance_double(CoordPair, is_a?: true) }
+    let(:start_coord) { instance_double(CoordPair) }
+    let(:destination_coord) { instance_double(CoordPair) }
     let(:board) { instance_double(Board) }
 
     context 'when target is an ally' do
