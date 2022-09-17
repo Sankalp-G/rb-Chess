@@ -122,4 +122,28 @@ describe Move do
       expect(move.endangers_king?(danger_board)).to be(false)
     end
   end
+
+  describe 'secondary move' do
+    let(:secondary_board) { Board.new }
+    let(:main_move) { described_class.new(CoordPair.new(6, 3), CoordPair.new(4, 3)) }
+    let(:another_move) { described_class.new(CoordPair.new(6, 4), CoordPair.new(4, 4)) }
+
+    before do
+      main_move.secondary_move = another_move
+    end
+
+    context 'when main move is executed' do
+      before do
+        main_move.execute_on_board(secondary_board)
+      end
+
+      it 'plays main move' do
+        expect(secondary_board.piece_at_coord(CoordPair.new(4, 3))).to be_a(Pawn)
+      end
+
+      it 'plays secondary move as well' do
+        expect(secondary_board.piece_at_coord(CoordPair.new(4, 4))).to be_a(Pawn)
+      end
+    end
+  end
 end
