@@ -1,8 +1,10 @@
 # A collection of coord pairs
 class CoordMap
+  attr_reader :coord_arr
+
   # create coord map from an array of coord pairs
   def initialize(coord_pair_array = [])
-    @map = coord_pair_array
+    @coord_arr = coord_pair_array
   end
 
   # create coord map from an array containing sub arrays made of x and y coordinates
@@ -14,13 +16,13 @@ class CoordMap
 
   # add another coord pair to coord map
   def append(coord_pair)
-    @map << coord_pair
+    @coord_arr << coord_pair
     self
   end
 
   # add a coordinate pair to all pairs in coord map
   def all_add(coord_pair)
-    @map.map! { |pair| pair + coord_pair }
+    @coord_arr.map! { |pair| pair + coord_pair }
     self
   end
 
@@ -36,19 +38,19 @@ class CoordMap
 
   # removes all coords in coord map with are out of bounds of a chess board
   def remove_out_of_bounds
-    @map = @map.filter(&:in_bounds?)
+    @coord_arr = @coord_arr.filter(&:in_bounds?)
     self
   end
 
   def coord_at_index(index)
-    @map[index]
+    @coord_arr[index]
   end
 
   def length
-    @map.length
+    @coord_arr.length
   end
 
   def each(&block)
-    @map.each(&block)
+    @coord_arr.each(&block)
   end
 end
