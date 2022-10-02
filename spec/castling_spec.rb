@@ -74,4 +74,50 @@ describe Castling do
       end
     end
   end
+
+  describe '#left_castle_move' do
+    let(:king_coord) { CoordPair.new(7, 4) }
+    let(:castle_obj) { described_class.new(king_coord, castle_board) }
+
+    before do
+      # clear path between king and rook
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(7, 1))
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(7, 2))
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(7, 3))
+    end
+
+    it 'returns correct main move' do
+      correct_move = Move.new(king_coord, CoordPair.new(7, 2))
+      expect(castle_obj.left_castle_move).to eq(correct_move)
+    end
+
+    it 'main move has correct secondary move' do
+      rook_move = Move.new(CoordPair.new(7, 0), CoordPair.new(7, 3))
+      secondary_move = castle_obj.left_castle_move.secondary_move
+      expect(secondary_move).to eq(rook_move)
+    end
+  end
+
+  describe '#right_castle_move' do
+    let(:king_coord) { CoordPair.new(0, 4) }
+    let(:castle_obj) { described_class.new(king_coord, castle_board) }
+
+    before do
+      # clear path between king and rook
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 5))
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 6))
+      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 7))
+    end
+
+    it 'returns correct main move' do
+      correct_move = Move.new(king_coord, CoordPair.new(0, 6))
+      expect(castle_obj.right_castle_move).to eq(correct_move)
+    end
+
+    it 'main move has correct secondary move' do
+      rook_move = Move.new(CoordPair.new(0, 7), CoordPair.new(0, 5))
+      secondary_move = castle_obj.right_castle_move.secondary_move
+      expect(secondary_move).to eq(rook_move)
+    end
+  end
 end

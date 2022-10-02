@@ -5,12 +5,33 @@ class Castling
     @board = board
   end
 
+  def move_arr
+    moves = []
+    moves << left_castle_move if can_castle_left?
+    moves << right_castle_move if can_castle_right?
+    moves
+  end
+
+  def left_castle_move
+    king_move = Move.new(@king_coord, @king_coord.offset_by(0, -2))
+    rook_move = Move.new(left_rook_coord, left_rook_coord.offset_by(0, 3))
+    king_move.secondary_move = rook_move
+    king_move
+  end
+
   def can_castle_left?
     return false unless coords_unoccupied?(left_between_coords)
     return false if @board.history.piece_moved?(king) || @board.history.piece_moved?(left_rook)
     return false if enemy_can_target_coords?(left_king_path_coords)
 
     true
+  end
+
+  def right_castle_move
+    king_move = Move.new(@king_coord, @king_coord.offset_by(0, 2))
+    rook_move = Move.new(right_rook_coord, right_rook_coord.offset_by(0, -2))
+    king_move.secondary_move = rook_move
+    king_move
   end
 
   def can_castle_right?
