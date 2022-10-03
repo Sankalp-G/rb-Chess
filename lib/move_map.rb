@@ -44,6 +44,10 @@ class MoveMap
     @moves_arr << move
   end
 
+  def concat_arr(moves_arr)
+    @moves_arr += moves_arr
+  end
+
   private
 
   def convert_to_moves(destination_coord_map)
