@@ -16,11 +16,10 @@ class Piece
   end
 
   def valid_move_map(start_coord, board)
-    MoveMap.new(start_coord, dest_coord_map(start_coord, board))
-           .remove_friendly_fire(board)
-           .remove_self_checks(board)
+    limited_move_map(start_coord, board).remove_self_checks(board)
   end
 
+  # for cases where piece can move even while possibly endangering their own king
   def limited_move_map(start_coord, board)
     MoveMap.new(start_coord, dest_coord_map(start_coord, board))
            .remove_friendly_fire(board)
