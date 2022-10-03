@@ -20,6 +20,7 @@ class Castling
   end
 
   def can_castle_left?
+    return false unless left_rook.is_a?(Rook)
     return false unless coords_unoccupied?(left_between_coords)
     return false if @board.history.piece_moved?(king) || @board.history.piece_moved?(left_rook)
     return false if enemy_can_target_coords?(left_king_path_coords)
@@ -35,6 +36,7 @@ class Castling
   end
 
   def can_castle_right?
+    return false unless right_rook.is_a?(Rook)
     return false unless coords_unoccupied?(right_between_coords)
     return false if @board.history.piece_moved?(king) || @board.history.piece_moved?(right_rook)
     return false if enemy_can_target_coords?(right_king_path_coords)
@@ -89,7 +91,7 @@ class Castling
 
   # coords between the king and the rook
   def right_between_coords
-    CoordMap.from_2d_array([[0, 1], [0, 2], [0, 3]])
+    CoordMap.from_2d_array([[0, 1], [0, 2]])
             .all_add(@king_coord)
             .coord_arr
   end

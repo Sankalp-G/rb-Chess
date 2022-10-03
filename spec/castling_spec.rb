@@ -47,7 +47,6 @@ describe Castling do
       # clear path between king and rook
       castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 5))
       castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 6))
-      castle_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 7))
     end
 
     context 'when all castling conditions are satisfied' do
