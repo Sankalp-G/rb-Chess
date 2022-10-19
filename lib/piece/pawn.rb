@@ -4,6 +4,13 @@ class Pawn < Piece
     '♟'
   end
 
+  def limited_move_map(start_coord, board)
+    en_passant_moves = EnPassant.new(start_coord, board).move_arr
+    move_map = super(start_coord, board)
+    move_map.concat_arr(en_passant_moves)
+    move_map
+  end
+
   def dest_coord_map(start_coord, board)
     CoordMap.new(all_destination_coords(start_coord, board))
   end
