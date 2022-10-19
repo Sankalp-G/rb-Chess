@@ -21,6 +21,7 @@ class Board
     board_arr_clone = @board_arr.map(&:clone)
     board_clone = Board.new
     board_clone.instance_variable_set(:@board_arr, board_arr_clone)
+    board_clone.instance_variable_set(:@history, @history)
     board_clone
   end
 
