@@ -1,7 +1,9 @@
 # describes point to point(s) movement on the chess board
 class Move
   attr_reader :start_coord, :destination_coord
-  attr_accessor :secondary_move
+  # secondary move executes along with the main move,
+  # deletion coord specifies a coord to be deleted when move is executed
+  attr_accessor :secondary_move, :deletion_coord
 
   def initialize(start_coord, destination_coord)
     @start_coord = start_coord
@@ -12,6 +14,7 @@ class Move
     board.move_piece_from_to(@start_coord, @destination_coord)
 
     secondary_move&.execute_on_board(board)
+    board.place_object_at_coord(Unoccupied.new, deletion_coord) unless deletion_coord.nil?
   end
 
   def in_bounds?

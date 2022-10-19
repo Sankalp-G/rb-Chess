@@ -135,4 +135,26 @@ describe Move do
       end
     end
   end
+
+  describe 'deletion coord' do
+    let(:deletion_board) { Board.new }
+    let(:del_move) { described_class.new(CoordPair.new(1, 3), CoordPair.new(3, 3)) }
+    let(:del_coord) { CoordPair.new(0, 0) }
+
+    before do
+      del_move.deletion_coord = del_coord
+    end
+
+    context 'when move is executed' do
+      it 'executes the main move' do
+        del_move.execute_on_board(deletion_board)
+        expect(deletion_board.piece_at_coord(CoordPair.new(3, 3))).to be_a(Pawn)
+      end
+
+      it 'un-occupies the tile at deletion coord' do
+        del_move.execute_on_board(deletion_board)
+        expect(deletion_board.piece_at_coord(del_coord)).to be_a(Unoccupied)
+      end
+    end
+  end
 end
