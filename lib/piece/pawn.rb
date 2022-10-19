@@ -59,4 +59,38 @@ class Pawn < Piece
 
     true
   end
+
+  def tile_has_enemy_pawn?(coord, board)
+    piece = board.piece_at_coord(coord)
+    return false unless tile_has_enemy?(coord, board)
+    return false unless piece.is_a?(Pawn)
+
+    true
+  end
+
+  def can_en_passant_left?(start_coord, board)
+    left_coord = start_coord.offset_by(0, -1)
+    return false unless tile_has_enemy_pawn?(left_coord, board)
+
+    left_piece = board.piece_at_coord(left_coord)
+    correct_position = start_coord.offset_by(2 * direction_multiplier, -1)
+    previous_board = board.history.previous_board
+
+    return false unless previous_board.piece_at_coord(correct_position) == left_piece
+
+    true
+  end
+
+  def can_en_passant_right?(start_coord, board)
+    right_coord = start_coord.offset_by(0, 1)
+    return false unless tile_has_enemy_pawn?(right_coord, board)
+
+    right_piece = board.piece_at_coord(right_coord)
+    correct_position = start_coord.offset_by(2 * direction_multiplier, 1)
+    previous_board = board.history.previous_board
+
+    return false unless previous_board.piece_at_coord(correct_position) == right_piece
+
+    true
+  end
 end
