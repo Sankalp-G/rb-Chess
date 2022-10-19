@@ -93,4 +93,18 @@ class Pawn < Piece
 
     true
   end
+
+  def left_en_passant_move(start_coord)
+    destination_coord = start_coord.offset_by(direction_multiplier, -1)
+    move = Move.new(start_coord, destination_coord)
+    move.deletion_coord = start_coord.offset_by(0, -1)
+    move
+  end
+
+  def right_en_passant_move(start_coord)
+    destination_coord = start_coord.offset_by(direction_multiplier, 1)
+    move = Move.new(start_coord, destination_coord)
+    move.deletion_coord = start_coord.offset_by(0, 1)
+    move
+  end
 end

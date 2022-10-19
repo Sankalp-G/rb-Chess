@@ -173,4 +173,42 @@ describe Pawn do
       end
     end
   end
+
+  describe '#left_en_passant_move' do
+    let(:pawn_coord) { CoordPair.new(4, 3) }
+    let(:pawn) { board.piece_at_coord(pawn_coord) }
+
+    before do
+      board.place_object_at_coord(described_class.new(:black), pawn_coord)
+    end
+
+    it 'has correct destination' do
+      move = pawn.left_en_passant_move(pawn_coord)
+      expect(move.destination_coord).to eq(CoordPair.new(5, 2))
+    end
+
+    it 'has correct deletion coord' do
+      move = pawn.left_en_passant_move(pawn_coord)
+      expect(move.deletion_coord).to eq(CoordPair.new(4, 2))
+    end
+  end
+
+  describe '#right_en_passant_move' do
+    let(:pawn_coord) { CoordPair.new(3, 5) }
+    let(:pawn) { board.piece_at_coord(pawn_coord) }
+
+    before do
+      board.place_object_at_coord(described_class.new(:white), pawn_coord)
+    end
+
+    it 'has correct destination' do
+      move = pawn.right_en_passant_move(pawn_coord)
+      expect(move.destination_coord).to eq(CoordPair.new(2, 6))
+    end
+
+    it 'has correct deletion coord' do
+      move = pawn.right_en_passant_move(pawn_coord)
+      expect(move.deletion_coord).to eq(CoordPair.new(3, 6))
+    end
+  end
 end
