@@ -5,6 +5,13 @@ class EnPassant
     @board = board
   end
 
+  def move_arr
+    moves = []
+    moves << left_en_passant_move if can_en_passant_left?
+    moves << right_en_passant_move if can_en_passant_right?
+    moves
+  end
+
   def can_en_passant_left?
     left_coord = @pawn_coord.offset_by(0, -1)
     return false unless tile_has_enemy_pawn?(left_coord, @board)
