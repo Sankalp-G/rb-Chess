@@ -2,11 +2,11 @@
 class History
   def initialize(initial_board = nil)
     @history_arr = []
-    @history_arr << initial_board unless initial_board.nil?
+    @history_arr << BoardClone.new(initial_board) unless initial_board.nil?
   end
 
   def save_board(board)
-    @history_arr << board.clone
+    @history_arr << BoardClone.new(board)
   end
 
   def piece_moved?(piece)
