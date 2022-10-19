@@ -65,4 +65,38 @@ describe Pawn do
       end
     end
   end
+
+  describe 'en passant tests' do
+    let(:pawn_coord) { CoordPair.new(3, 3) }
+    let(:pawn_moves) { board.moves_for_coord(CoordPair.new(3, 3)) }
+
+    before do
+      board.place_object_at_coord(described_class.new(:white), pawn_coord)
+      board.move_piece_from_to(CoordPair.new(1, 2), CoordPair.new(3, 2))
+      board.save_to_history
+    end
+
+    describe '#valid_move_map' do
+      it 'returns move map with 2 moves' do
+        # two moves one for moving forward and one for en passant
+        expected_dest = CoordMap.from_2d_array([[2, 3], [2, 2]])
+        expect(pawn_moves.dest_coord_map).to eq(expected_dest)
+      end
+    end
+
+    describe 'executing en passant' do
+      before do
+        en_passant_move = pawn_moves.moves_arr.last
+        en_passant_move.execute_on_board(board)
+      end
+
+      it 'moves pawn to correct location' do
+        expect(board.piece_at_coord(CoordPair.new(2, 2))).to be_a(described_class)
+      end
+
+      it 'kills enemy pawn as well' do
+        expect(board.piece_at_coord(CoordPair.new(2, 3))).to be_a(Unoccupied)
+      end
+    end
+  end
 end
