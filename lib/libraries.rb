@@ -2,6 +2,7 @@
 require 'colorize'
 
 # Internal
+require_relative 'colorable_string'
 require_relative 'piece'
 require_relative 'history'
 require_relative 'board_constants'
