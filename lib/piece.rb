@@ -6,15 +6,6 @@ class Piece
     @color = color
   end
 
-  # returns a colorized chess piece symbol
-  def colored_symbol
-    " #{symbol.colorize(@color.to_sym)} "
-  end
-
-  def with_bg_color(color)
-    colored_symbol.colorize(background: color.to_sym)
-  end
-
   def valid_move_map(start_coord, board)
     limited_move_map(start_coord, board).remove_self_checks(board)
   end

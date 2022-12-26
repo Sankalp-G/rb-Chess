@@ -29,13 +29,6 @@ class Board
     @history.save_board(self)
   end
 
-  def display_board(board = colorized_board)
-    board.each do |row|
-      row.each { |tile| print tile }
-      puts
-    end
-  end
-
   def display
     BoardDisplay.new(@board_arr)
   end
@@ -107,17 +100,5 @@ class Board
       end
     end
     move_map_arr
-  end
-
-  private
-
-  # returns default colorized symbols and backgrounds from the board
-  def colorized_board
-    background_cycle = %w[red blue].cycle
-
-    @board_arr.map do |row|
-      background_cycle.next
-      row.map { |piece| piece.with_bg_color(background_cycle.next) }
-    end
   end
 end

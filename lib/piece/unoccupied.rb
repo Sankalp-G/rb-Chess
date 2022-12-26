@@ -4,10 +4,6 @@ class Unoccupied < Piece
     @color = color
   end
 
-  def colored_symbol
-    '   '
-  end
-
   def symbol
     ' '
   end
