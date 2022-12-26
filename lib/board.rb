@@ -36,6 +36,10 @@ class Board
     end
   end
 
+  def display
+    BoardDisplay.new(@board_arr)
+  end
+
   def find_coord_of_piece(piece)
     @board_arr.each_with_index do |row, row_index|
       col_index = row.index(piece)
