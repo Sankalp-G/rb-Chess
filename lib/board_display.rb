@@ -8,10 +8,17 @@ class BoardDisplay
   end
 
   def prints
-    @symbol_arr.each do |row|
+    @symbol_arr.each_with_index do |row, index|
+      print(8 - index, ' ') # number column
+
       row.each { |symbol| print symbol }
       puts
     end
+    puts alphabet_row
+  end
+
+  def alphabet_row
+    ('a'..'h').to_a.join('  ').prepend('   ')
   end
 
   def add_background_color(symbol_arr)
