@@ -26,5 +26,13 @@ module ColorableString
     def highlight
       bg_color(:highlighted)
     end
+
+    def reset_fg_color
+      gsub!(/\e\[38.*?m/, '')
+    end
+
+    def reset_bg_color
+      gsub!(/\e\[48.*?m/, '')
+    end
   end
 end
