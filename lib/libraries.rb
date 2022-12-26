@@ -1,6 +1,3 @@
-# External
-require 'colorize'
-
 # Internal
 require_relative 'colorable_string'
 require_relative 'piece'
