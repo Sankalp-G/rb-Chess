@@ -11,6 +11,14 @@ class CoordPair
     CoordPair.new(coord_array[0], coord_array[1])
   end
 
+  # chess notation eg: a1 c5 g8
+  def self.from_algebraic_notation(coord_string)
+    letter = coord_string[0].downcase
+    number = coord_string[1].to_i
+
+    CoordPair.new(8 - number, ('a'..'h').to_a.index(letter))
+  end
+
   # checks if coord is within the bounds of a chess board
   def in_bounds?
     return true if @x.between?(0, 7) && @y.between?(0, 7)

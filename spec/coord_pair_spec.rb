@@ -17,6 +17,13 @@ describe CoordPair do
     end
   end
 
+  describe '#from_algebraic_notation' do
+    it 'creates a new coord object from chess algebraic notation' do
+      new_coord = described_class.from_algebraic_notation('e5')
+      expect(new_coord).to have_attributes(x: 3, y: 4)
+    end
+  end
+
   describe '#to_array' do
     subject(:arr_coord) { described_class.new(3, 4) }
 
