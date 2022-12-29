@@ -6,6 +6,18 @@ class Chess
     self
   end
 
+  def start_game_loop
+    until game_over?
+      # play turns
+    end
+
+    # handle game over
+  end
+
+  def game_over?
+    checkmate? || stalemate?
+  end
+
   def switch_player
     @active_player == :white ? :black : :white
   end
