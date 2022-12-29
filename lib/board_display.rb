@@ -3,8 +3,41 @@ class BoardDisplay
   using ColorableString
 
   def initialize(board_arr)
+    @board_arr = board_arr
     @symbol_arr = generate_colored_symbols(board_arr)
     add_background_color(@symbol_arr)
+  end
+
+  def highlight_move_map(move_map)
+    highlight_coord(move_map.start_coord, :gray_highlight)
+
+    move_map.each_move do |move|
+      dest_coord = move.destination_coord
+      if coord_unoccupied?(dest_coord)
+        highlight_unoccupied_coord(dest_coord)
+      else
+        highlight_coord(dest_coord, :red_highlight)
+      end
+    end
+    self
+  end
+
+  def highlight_coord(coord_pair, color = :light_highlight)
+    @symbol_arr[coord_pair.x][coord_pair.y].replace_bg_color(color)
+    self
+  end
+
+  def highlight_unoccupied_coord(coord_pair)
+    coord_sum = coord_pair.x + coord_pair.y
+    if coord_sum.odd?
+      highlight_coord(coord_pair, :dark_highlight)
+    else
+      highlight_coord(coord_pair, :light_highlight)
+    end
+  end
+
+  def coord_unoccupied?(coord_pair)
+    return true if @board_arr[coord_pair.x][coord_pair.y].is_a?(Unoccupied)
   end
 
   def prints
