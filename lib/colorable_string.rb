@@ -7,7 +7,8 @@ module ColorableString
     white: '202;144;100',
     dark_tile: '50;103;75',
     light_tile: '238;238;234',
-    highlighted: '100;200;190',
+    light_highlight: '100;200;190',
+    dark_highlight: '50;150;150',
     gray_highlight: '100;100;100',
     red_highlight: '230;100;100'
   }.freeze
@@ -31,7 +32,7 @@ module ColorableString
     end
 
     def highlight
-      replace_bg_color(:highlighted)
+      replace_bg_color(:light_highlighted)
     end
 
     def reset_fg_color
