@@ -7,7 +7,9 @@ module ColorableString
     white: '202;144;100',
     dark_tile: '50;103;75',
     light_tile: '238;238;234',
-    highlighted: '197;211;157'
+    highlighted: '100;200;190',
+    gray_highlight: '100;100;100',
+    red_highlight: '230;100;100'
   }.freeze
 
   refine String do
@@ -23,8 +25,13 @@ module ColorableString
       "\e[48;2;#{rgb_val}m#{str}\e[0m"
     end
 
+    def replace_bg_color(color)
+      new_string = reset_bg_color.bg_color(color)
+      replace(new_string)
+    end
+
     def highlight
-      bg_color(:highlighted)
+      replace_bg_color(:highlighted)
     end
 
     def reset_fg_color
