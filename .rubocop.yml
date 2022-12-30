@@ -8,3 +8,7 @@ Style/FrozenStringLiteralComment:
 
 RSpec/VerifiedDoubles:
   Enabled: false
+
+RSpec/SubjectStub:
+  Enabled: false
+  
