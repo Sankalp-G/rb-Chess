@@ -28,4 +28,8 @@ class Turn
       return CoordPair.from_algebraic_notation(input)
     end
   end
+
+  def clear_terminal
+    system('clear') || system('cls')
+  end
 end
