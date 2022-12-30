@@ -26,6 +26,10 @@ class MoveMap
     CoordMap.new(destination_coords)
   end
 
+  def select_by_dest_coord(destination_coord)
+    @moves_arr.find { |move| move.destination_coord == destination_coord }
+  end
+
   def can_target_coord?(coord)
     dest_coord_map.each { |dest_coord| return true if dest_coord == coord }
     false
