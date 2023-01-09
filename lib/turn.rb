@@ -80,7 +80,10 @@ class Turn
 
     print "\n#{@active_player.capitalize} player turn\n"
 
-    puts @prompt and @prompt = nil unless @prompt.nil?
+    return if @prompt.nil?
+
+    puts @prompt
+    @prompt = nil
   end
 
   def invalid_move?(move)
