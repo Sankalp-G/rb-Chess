@@ -8,7 +8,9 @@ class Chess
 
   def start_game_loop
     until game_over?
-      # play turns
+      Turn.new(@board, @active_player).play
+      @board.save_to_history
+      switch_player
     end
 
     # handle game over
@@ -19,7 +21,7 @@ class Chess
   end
 
   def switch_player
-    @active_player == :white ? :black : :white
+    @active_player = @active_player == :white ? :black : :white
   end
 
   def checkmate?
