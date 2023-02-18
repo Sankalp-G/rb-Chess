@@ -13,11 +13,21 @@ class Chess
       switch_player
     end
 
-    # handle game over
+    redraw_board
+    display_game_over_prompt
   end
 
   def game_over?
     checkmate? || stalemate?
+  end
+
+  def display_game_over_prompt
+    if checkmate?
+      winner = @active_player == :white ? :black : :white
+      puts "\n#{winner} player wins by checkmate! Congratulations."
+    elsif stalemate?
+      puts "\nThe game is tied by stalemate! Since #{active_player} has no possible moves."
+    end
   end
 
   def switch_player
@@ -48,5 +58,14 @@ class Chess
       move_piece = @board.piece_at_coord(move_map.start_coord)
       move_piece.color == player_color
     end
+  end
+
+  def redraw_board
+    clear_terminal
+    @board.display.prints
+  end
+
+  def clear_terminal
+    system('clear') || system('cls')
   end
 end
