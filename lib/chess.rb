@@ -26,6 +26,18 @@ class Chess
     display_game_over_prompt
   end
 
+  def save_game_state
+    save_object = { board: @board, active_player: @active_player }
+    save_data = Marshal.dump(save_object)
+
+    current_time = Time.now
+    file_name = current_time.strftime('%H-%M %d-%m-%y')
+
+    FileUtils.mkdir('./saves') unless File.directory?('./saves')
+
+    File.write("./saves/#{file_name}", save_data, mode: 'wb')
+  end
+
   def game_over?
     checkmate? || stalemate?
   end

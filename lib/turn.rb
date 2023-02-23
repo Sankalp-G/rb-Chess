@@ -117,6 +117,9 @@ class Turn
       @state = :initial
       @selected_coord = nil
       return true
+    elsif %w[s save].include?(command)
+      save_game_state
+      exit
     elsif %w[x exit].include?(command)
       exit
     end
@@ -124,7 +127,7 @@ class Turn
   end
 
   def command?(string)
-    %w[x exit b back].include?(string)
+    %w[x exit s save b back].include?(string)
   end
 
   def coord?(string)
@@ -133,6 +136,18 @@ class Turn
     letter = string[0].downcase
     number = string[1].to_i
     ('a'..'h').include?(letter) && (1..8).include?(number)
+  end
+
+  def save_game_state
+    save_object = { board: @board, active_player: @active_player }
+    save_data = Marshal.dump(save_object)
+
+    current_time = Time.now
+    file_name = current_time.strftime('%H-%M %d-%m-%y')
+
+    FileUtils.mkdir('./saves') unless File.directory?('./saves')
+
+    File.write("./saves/#{file_name}", save_data, mode: 'wb')
   end
 
   def clear_terminal
