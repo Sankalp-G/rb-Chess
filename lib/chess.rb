@@ -1,5 +1,18 @@
 # class dictating main game flow
 class Chess
+  def main_menu
+    clear_terminal
+    puts 'Welcome to Chess!'
+    puts "\nChoose one of the the following options:"
+    puts '[1] New game'
+    puts '[2] Exit'
+
+    case get_player_input_between(1, 2)
+    when 1 then new_game and start_game_loop
+    when 2 then exit
+    end
+  end
+
   def new_game
     @active_player = :white
     @board = Board.new
@@ -67,5 +80,16 @@ class Chess
 
   def clear_terminal
     system('clear') || system('cls')
+  end
+
+  # gets input from terminal and returns input as integer, retries if invalid
+  def get_player_input_between(start_num, end_num)
+    loop do
+      input = gets.chomp.to_i
+
+      return input if input.between?(start_num, end_num)
+
+      puts "\nInvalid Input: you must enter a number between #{start_num} and #{end_num}, Try again"
+    end
   end
 end

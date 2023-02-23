@@ -1,9 +1,47 @@
 require_relative '../lib/libraries'
 
 describe Chess do
-  subject(:chess_game) { described_class.new.new_game }
+  subject(:chess_game) { described_class.new }
+
+  describe '#main_menu' do
+    before do
+      allow(chess_game).to receive(:puts)
+      allow(chess_game).to receive(:clear_terminal)
+      allow(chess_game).to receive(:new_game)
+    end
+
+    context 'when valid menu input is given' do
+      before do
+        valid_menu_option = '1'
+        allow(chess_game).to receive(:gets).and_return(valid_menu_option)
+      end
+
+      it 'executes menu option' do
+        expect(chess_game).to receive(:new_game).once
+        chess_game.main_menu
+      end
+    end
+
+    context 'when invalid menu input is given' do
+      before do
+        invalid_inputs = %w[155 32]
+        valid_input = '1'
+
+        allow(chess_game).to receive(:gets).and_return(*invalid_inputs, valid_input)
+      end
+
+      it 'retries until valid input is given' do
+        expect(chess_game).to receive(:gets).exactly(3).times
+        chess_game.main_menu
+      end
+    end
+  end
 
   describe '#checkmate?' do
+    before do
+      chess_game.new_game
+    end
+
     it 'returns false when there is no checkmate' do
       expect(chess_game.checkmate?).to be(false)
     end
@@ -31,6 +69,10 @@ describe Chess do
   end
 
   describe '#stalemate' do
+    before do
+      chess_game.new_game
+    end
+
     context 'when there is no stalemate' do
       it 'returns false' do
         expect(chess_game.stalemate?).to be(false)
