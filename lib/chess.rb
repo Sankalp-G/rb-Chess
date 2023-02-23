@@ -1,11 +1,7 @@
 # class dictating main game flow
 class Chess
   def main_menu
-    clear_terminal
-    puts 'Welcome to Chess!'
-    puts "\nChoose one of the the following options:"
-    puts '[1] New game'
-    puts '[2] Exit'
+    main_menu_prompt
 
     case get_player_input_between(1, 2)
     when 1 then new_game and start_game_loop
@@ -80,6 +76,26 @@ class Chess
 
   def clear_terminal
     system('clear') || system('cls')
+  end
+
+  def main_menu_prompt
+    clear_terminal
+    puts chess_ascii_art
+    puts "\nWelcome to Chess!"
+    puts "\nChoose one of the the following options:"
+    puts '[1] New game'
+    puts '[2] Exit'
+  end
+
+  def chess_ascii_art
+    <<~CHESS
+      ░█████╗░██╗░░██╗███████╗░██████╗░██████╗
+      ██╔══██╗██║░░██║██╔════╝██╔════╝██╔════╝
+      ██║░░╚═╝███████║█████╗░░╚█████╗░╚█████╗░
+      ██║░░██╗██╔══██║██╔══╝░░░╚═══██╗░╚═══██╗
+      ╚█████╔╝██║░░██║███████╗██████╔╝██████╔╝
+      ░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░
+    CHESS
   end
 
   # gets input from terminal and returns input as integer, retries if invalid
