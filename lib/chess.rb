@@ -3,9 +3,10 @@ class Chess
   def main_menu
     main_menu_prompt
 
-    case get_player_input_between(1, 2)
+    case get_player_input_between(1, 3)
     when 1 then new_game and start_game_loop
-    when 2 then exit
+    when 2 then clear_terminal and load_menu
+    when 3 then exit
     end
   end
 
@@ -24,6 +25,30 @@ class Chess
 
     redraw_board
     display_game_over_prompt
+  end
+
+  def load_menu
+    saves = Dir.children('./saves/')
+    if saves.empty?
+      puts "No saves found\nPress enter to go back"
+      gets
+      main_menu
+    end
+
+    puts "Select which save file you would like to load: \n\n"
+    saves.each_with_index { |save, index| puts "#{index + 1}] #{save}" }
+
+    selected_index = get_player_input_between(1, saves.length) - 1
+    load_save("./saves/#{saves[selected_index]}")
+  end
+
+  def load_save(save_location)
+    file_content = File.binread(save_location)
+    save_object = Marshal.load(file_content)
+
+    @active_player = save_object[:active_player]
+    @board = save_object[:board]
+    start_game_loop
   end
 
   def save_game_state
@@ -96,7 +121,8 @@ class Chess
     puts "\nWelcome to Chess!"
     puts "\nChoose one of the the following options:"
     puts '[1] New game'
-    puts '[2] Exit'
+    puts '[2] Load game'
+    puts '[3] Exit'
   end
 
   def chess_ascii_art
