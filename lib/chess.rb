@@ -25,6 +25,20 @@ class Chess
 
     redraw_board
     display_game_over_prompt
+    game_over_menu
+  end
+
+  def game_over_menu
+    puts
+    puts '[1] Main menu'
+    puts '[2] New game'
+    puts '[3] Exit'
+
+    case get_player_input_between(1, 3)
+    when 1 then main_menu
+    when 2 then new_game and start_game_loop
+    when 3 then exit
+    end
   end
 
   def load_menu
