@@ -53,19 +53,19 @@ class Turn
   end
 
   # runs input command or sets given input coord as @coord instance variable
-  # returns true if command is run
+  # returns true if command is run or invalid prompt is displayed
   def gets_player_input
     input = gets.chomp
 
     if command?(input)
       run_command(input)
-      return true
     elsif coord?(input)
       @coord = CoordPair.from_algebraic_notation(input)
+      return false
     else
       @prompt = "\nInvalid Input.\n"
     end
-    false
+    true
   end
 
   def display_game_screen

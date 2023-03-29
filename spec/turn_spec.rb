@@ -28,6 +28,20 @@ describe Turn do
       end
     end
 
+    context 'when input is invalid then valid' do
+      before do
+        invalid_input = 'h'
+        valid_start_coord = 'b2'
+        valid_dest_coord = 'b3'
+        allow(turn_obj).to receive(:gets).and_return(invalid_input, valid_start_coord, valid_dest_coord)
+      end
+
+      it 'give invalid input prompt and tries again' do
+        turn_obj.play
+        expect(turn_obj).to have_received(:puts).with("\nInvalid Input.\n")
+      end
+    end
+
     context 'when x or exit command is used' do
       it 'exits the whole program' do
         allow(turn_obj).to receive(:gets).and_return('x')
