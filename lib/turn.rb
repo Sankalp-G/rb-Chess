@@ -1,5 +1,7 @@
 # class handling interactions for a single turn for one player in chess
 class Turn
+  using ColorableString
+
   def initialize(board, active_player)
     @board = board
     @active_player = active_player
@@ -27,7 +29,7 @@ class Turn
   end
 
   def select_piece_coord
-    print "\nSelect the piece you would like to move:\n\n> "
+    print "\n[x] exit [s] save and exit\n\nSelect the piece you would like to move:\n\n> "
 
     gets_player_input and return
 
@@ -41,7 +43,8 @@ class Turn
     moves = @board.moves_for_coord(@selected_coord)
     no_valid_moves?(moves) and return
 
-    print "\nSelect the tile where you would like to move the piece to.\nType b to go back or x to exit\n\n> "
+    print "\n[b] go back [x] exit [s] save and exit\n
+Select the tile where you would like to move the piece to.\n\n> "
 
     gets_player_input and return
 
@@ -63,7 +66,7 @@ class Turn
       @coord = CoordPair.from_algebraic_notation(input)
       return false
     else
-      @prompt = "\nInvalid Input.\n"
+      @prompt = "\nInvalid Input.\nUse chess notation eg: c2\n"
     end
     true
   end
@@ -78,7 +81,7 @@ class Turn
     end
     display.prints
 
-    print "\n#{@active_player.capitalize} player turn\n"
+    print "\n#{@active_player.capitalize.to_s.bg_color(@active_player)} player turn\n"
 
     return if @prompt.nil?
 
