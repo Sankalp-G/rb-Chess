@@ -96,7 +96,7 @@ describe Board do
       end
 
       it 'returns "black"' do
-        expect(check_board.check).to eql(:black)
+        expect(check_board.check).to be(:black)
       end
     end
 
@@ -106,7 +106,7 @@ describe Board do
       end
 
       it 'returns "white"' do
-        expect(check_board.check).to eql(:white)
+        expect(check_board.check).to be(:white)
       end
     end
   end
