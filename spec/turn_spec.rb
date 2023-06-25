@@ -38,7 +38,7 @@ describe Turn do
 
       it 'give invalid input prompt and tries again' do
         turn_obj.play
-        expect(turn_obj).to have_received(:puts).with("\nInvalid Input.\n")
+        expect(turn_obj).to have_received(:puts).with("\nInvalid Input.\nUse chess notation eg: c2\n")
       end
     end
 
