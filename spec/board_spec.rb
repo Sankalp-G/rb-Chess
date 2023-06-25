@@ -110,4 +110,23 @@ describe Board do
       end
     end
   end
+
+  describe '#==?' do
+    subject(:board) { described_class.new }
+
+    let(:other_board) { described_class.new }
+
+    context 'when boards are equal' do
+      it 'returns true' do
+        expect(board).to eq(other_board)
+      end
+    end
+
+    context 'when boards are not equal' do
+      it 'returns false' do
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(2, 5))
+        expect(board).not_to eq(other_board)
+      end
+    end
+  end
 end

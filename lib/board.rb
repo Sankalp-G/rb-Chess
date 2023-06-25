@@ -101,4 +101,14 @@ class Board
     end
     move_map_arr
   end
+
+  def ==(other)
+    other_board_arr = other.instance_variable_get(:@board_arr)
+
+    @board_arr.each_with_index do |row, row_index|
+      row.each_with_index do |piece, col_index|
+        return false unless piece.class.name == other_board_arr[row_index][col_index].class.name
+      end
+    end
+  end
 end
