@@ -94,4 +94,61 @@ describe Chess do
       end
     end
   end
+
+  describe '#threefold_repetition?' do
+    before do
+      chess_game.new_game
+    end
+
+    context 'when there is no threefold repetition' do
+      it 'returns false' do
+        expect(chess_game.threefold_repetition?).to be(false)
+      end
+    end
+
+    context 'when there is threefold repetition' do
+      let(:repetition_board) { Board.new }
+
+      before do
+        3.times do
+          repetition_board.move_piece_from_to(CoordPair.new(0, 1), CoordPair.new(2, 2))
+          repetition_board.save_to_history
+          repetition_board.move_piece_from_to(CoordPair.new(2, 2), CoordPair.new(0, 1))
+          repetition_board.save_to_history
+        end
+
+        chess_game.instance_variable_set(:@board, repetition_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game.threefold_repetition?).to be(true)
+      end
+    end
+
+    context 'when there is threefold repetition but not in a row' do
+      let(:repetition_board) { Board.new }
+
+      before do
+        2.times do
+          repetition_board.move_piece_from_to(CoordPair.new(0, 1), CoordPair.new(2, 2))
+          repetition_board.save_to_history
+          repetition_board.move_piece_from_to(CoordPair.new(2, 2), CoordPair.new(0, 1))
+          repetition_board.save_to_history
+        end
+
+        repetition_board.move_piece_from_to(CoordPair.new(0, 3), CoordPair.new(2, 4))
+        repetition_board.save_to_history
+        repetition_board.move_piece_from_to(CoordPair.new(0, 1), CoordPair.new(2, 2))
+        repetition_board.save_to_history
+        repetition_board.move_piece_from_to(CoordPair.new(2, 4), CoordPair.new(0, 3))
+        repetition_board.save_to_history
+
+        chess_game.instance_variable_set(:@board, repetition_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game.threefold_repetition?).to be(true)
+      end
+    end
+  end
 end
