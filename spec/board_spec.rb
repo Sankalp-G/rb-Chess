@@ -129,4 +129,24 @@ describe Board do
       end
     end
   end
+
+  describe '#pieces_count_hash' do
+    subject(:board) { described_class.new_blank_board }
+
+    context 'when board is empty' do
+      it 'returns 0' do
+        expect(board.pieces_count_hash).to eq({})
+      end
+    end
+
+    context 'when board has pieces' do
+      it 'returns the number of pieces' do
+        board.place_object_at_coord(Knight.new(:black), CoordPair.new(2, 5))
+        board.place_object_at_coord(Pawn.new(:white), CoordPair.new(3, 5))
+        board.place_object_at_coord(Pawn.new(:black), CoordPair.new(4, 5))
+
+        expect(board.pieces_count_hash).to eq({ Knight: 1, Pawn: 2 })
+      end
+    end
+  end
 end

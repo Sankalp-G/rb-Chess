@@ -102,6 +102,16 @@ class Board
     move_map_arr
   end
 
+  def pieces_count_hash
+    pieces_count_hash = Hash.new(0)
+    @board_arr.flatten.each do |piece|
+      next if piece.is_a?(Unoccupied)
+
+      pieces_count_hash[piece.class.name.to_sym] += 1
+    end
+    pieces_count_hash
+  end
+
   def ==(other)
     other_board_arr = other.instance_variable_get(:@board_arr)
 
