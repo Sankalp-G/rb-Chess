@@ -113,6 +113,15 @@ class Chess
       .all? { |move_map| move_map.moves_arr.empty? }
   end
 
+  def threefold_repetition?
+    repetitions = 0
+    @board.history.history_arr.reverse.each do |board|
+      repetitions += 1 if board == @board
+      return true if repetitions >= 3
+    end
+    false
+  end
+
   def move_map_arr_for_player(player_color)
     @board.all_moves_arr.filter do |move_map|
       move_piece = @board.piece_at_coord(move_map.start_coord)
