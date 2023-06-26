@@ -78,7 +78,7 @@ class Chess
   end
 
   def game_over?
-    checkmate? || stalemate?
+    checkmate? || stalemate? || threefold_repetition?
   end
 
   def display_game_over_prompt
@@ -87,6 +87,8 @@ class Chess
       puts "\n#{winner} player wins by checkmate! Congratulations."
     elsif stalemate?
       puts "\nThe game is tied by stalemate! Since #{active_player} has no possible moves."
+    elsif threefold_repetition?
+      puts "\nThe game is tied by threefold repetition! Since the same board state has occured three times."
     end
   end
 
