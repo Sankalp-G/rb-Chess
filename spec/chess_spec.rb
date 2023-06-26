@@ -151,4 +151,67 @@ describe Chess do
       end
     end
   end
+
+  describe '#_50_move_rule?' do
+    let(:_50_move_board) { Board.new }
+
+    before do
+      chess_game.new_game
+    end
+
+    context 'when there is no 50 move rule' do
+      it 'returns false' do
+        expect(chess_game._50_move_rule?).to be(false)
+      end
+    end
+
+    context 'when there was a capture 50 moves ago but no pawn moved' do
+      before do
+        _50_move_board.place_object_at_coord(Unoccupied.new, CoordPair.new(0, 1))
+
+        49.times do
+          _50_move_board.save_to_history
+        end
+
+        chess_game.instance_variable_set(:@board, _50_move_board)
+      end
+
+      it 'returns false' do
+        expect(chess_game._50_move_rule?).to be(false)
+      end
+    end
+
+    context 'when there was a pawn move 50 moves ago but no capture' do
+      before do
+        _50_move_board.move_piece_from_to(CoordPair.new(6, 2), CoordPair.new(4, 2))
+
+        49.times do
+          _50_move_board.save_to_history
+        end
+
+        chess_game.instance_variable_set(:@board, _50_move_board)
+      end
+
+      it 'returns false' do
+        expect(chess_game._50_move_rule?).to be(false)
+      end
+    end
+
+    context 'when there is 50 move rule' do
+      before do
+        25.times do
+          _50_move_board.move_piece_from_to(CoordPair.new(0, 1), CoordPair.new(2, 2))
+          _50_move_board.save_to_history
+          _50_move_board.move_piece_from_to(CoordPair.new(2, 2), CoordPair.new(0, 1))
+          _50_move_board.save_to_history
+        end
+
+        chess_game.instance_variable_set(:@board, _50_move_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game._50_move_rule?).to be(true)
+      end
+    end
+  end
 end
