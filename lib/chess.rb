@@ -124,6 +124,39 @@ class Chess
     false
   end
 
+  def _50_move_rule?
+    return false if @board.history.history_arr.length < 50
+
+    (last_time_piece_captured.nil? || last_time_piece_captured >= 50) &&
+      (last_time_pawn_moved.nil? || last_time_pawn_moved >= 50)
+  end
+
+  private
+
+  def last_time_piece_captured
+    @board.history.history_arr.reverse.each_with_index do |board, index|
+      return index if @board.piece_count < board.piece_count
+    end
+    nil
+  end
+
+  def last_time_pawn_moved
+    @board.history.history_arr.reverse.each_with_index do |board, index|
+      return index if pawn_positions(@board) != pawn_positions(board)
+    end
+    nil
+  end
+
+  def pawn_positions(board)
+    pawn_positions = []
+    board.board_arr.each_with_index do |row, row_index|
+      row.each_with_index do |piece, col_index|
+        pawn_positions << CoordPair.new(row_index, col_index) if piece.is_a?(Pawn)
+      end
+    end
+    pawn_positions
+  end
+
   def move_map_arr_for_player(player_color)
     @board.all_moves_arr.filter do |move_map|
       move_piece = @board.piece_at_coord(move_map.start_coord)

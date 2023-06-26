@@ -1,7 +1,7 @@
 # class handling chess board info
 class Board
   include BoardConstants
-  attr_reader :history
+  attr_reader :history, :board_arr
 
   def initialize
     @board_arr = default_chess_board
@@ -100,6 +100,10 @@ class Board
       end
     end
     move_map_arr
+  end
+
+  def piece_count
+    pieces_count_hash.values.sum
   end
 
   def pieces_count_hash
