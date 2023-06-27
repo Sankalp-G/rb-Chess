@@ -78,7 +78,7 @@ class Chess
   end
 
   def game_over?
-    checkmate? || stalemate? || threefold_repetition?
+    checkmate? || stalemate? || threefold_repetition? || _50_move_rule?
   end
 
   def display_game_over_prompt
@@ -89,6 +89,9 @@ class Chess
       puts "\nThe game is tied by stalemate! Since #{active_player} has no possible moves."
     elsif threefold_repetition?
       puts "\nThe game is tied by threefold repetition! Since the same board state has occured three times."
+    elsif _50_move_rule?
+      puts "\nThe game is tied due to the 50 move rule!
+Since no pawn has been moved or piece been captured in the last 50 moves."
     end
   end
 
