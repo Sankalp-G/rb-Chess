@@ -149,6 +149,14 @@ Since no pawn has been moved or piece been captured in the last 50 moves."
     end
   end
 
+  def insufficient_material?
+    insufficient_material_for_color?(:white) && insufficient_material_for_color?(:black)
+  end
+
+  def insufficient_material_for_color?(color)
+    [{ King: 1 }, { King: 1, Bishop: 1 }, { King: 1, Knight: 1 }].include?(@board.piece_count_hash_for_color(color))
+  end
+
   private
 
   def promote_pawn_prompt(color)

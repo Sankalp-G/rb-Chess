@@ -258,4 +258,33 @@ describe Chess do
       expect(board.piece_at_coord(CoordPair.new(0, 6)).class).to eq(Queen)
     end
   end
+
+  describe '#insufficient_material?' do
+    let(:insufficient_board) { Board.new }
+
+    before do
+      chess_game.new_game
+    end
+
+    context 'when there is no insufficient material' do
+      it 'returns false' do
+        expect(chess_game.insufficient_material?).to be(false)
+      end
+    end
+
+    context 'when there is insufficient material' do
+      let(:insufficient_board) { Board.new_blank_board }
+
+      before do
+        insufficient_board.place_object_at_coord(King.new(:white), CoordPair.new(0, 0))
+        insufficient_board.place_object_at_coord(King.new(:black), CoordPair.new(7, 0))
+        insufficient_board.place_object_at_coord(Knight.new(:black), CoordPair.new(1, 2))
+        chess_game.instance_variable_set(:@board, insufficient_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game.insufficient_material?).to be(true)
+      end
+    end
+  end
 end
