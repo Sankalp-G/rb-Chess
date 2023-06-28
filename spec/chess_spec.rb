@@ -214,4 +214,30 @@ describe Chess do
       end
     end
   end
+
+  describe '#pawn_promotion?' do
+    before do
+      chess_game.new_game
+    end
+
+    context 'when there is no pawn promotion' do
+      it 'returns false' do
+        expect(chess_game.pawn_promotion?).to be(false)
+      end
+    end
+
+    context 'when there is a pawn at the topmost or bottomost row' do
+      let(:promotion_board) { Board.new }
+
+      before do
+        promotion_board.place_object_at_coord(Pawn.new(:white), CoordPair.new(0, 6))
+        promotion_board.place_object_at_coord(King.new(:black), CoordPair.new(7, 0))
+        chess_game.instance_variable_set(:@board, promotion_board)
+      end
+
+      it 'returns true' do
+        expect(chess_game.pawn_promotion?).to be(true)
+      end
+    end
+  end
 end

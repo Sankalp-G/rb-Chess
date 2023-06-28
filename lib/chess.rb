@@ -134,6 +134,11 @@ Since no pawn has been moved or piece been captured in the last 50 moves."
       (last_time_pawn_moved.nil? || last_time_pawn_moved >= 50)
   end
 
+  def pawn_promotion?
+    @board.board_arr[0].any? { |piece| piece.is_a?(Pawn) } ||
+      @board.board_arr[7].any? { |piece| piece.is_a?(Pawn) }
+  end
+
   private
 
   def last_time_piece_captured
