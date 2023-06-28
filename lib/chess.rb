@@ -139,7 +139,32 @@ Since no pawn has been moved or piece been captured in the last 50 moves."
       @board.board_arr[7].any? { |piece| piece.is_a?(Pawn) }
   end
 
+  def promote_pawns
+    @board.board_arr.each_with_index do |row, row_index|
+      row.each_with_index do |piece, col_index|
+        next unless piece.is_a?(Pawn) && (row_index.zero? || row_index == 7)
+
+        @board.place_object_at_coord(promote_pawn_prompt(piece.color), CoordPair.new(row_index, col_index))
+      end
+    end
+  end
+
   private
+
+  def promote_pawn_prompt(color)
+    puts "\nYour pawn has reached the end of the board! What would you like to promote it to?"
+    puts '[1] Queen'
+    puts '[2] Rook'
+    puts '[3] Bishop'
+    puts '[4] Knight'
+
+    case get_player_input_between(1, 4)
+    when 1 then Queen.new(color)
+    when 2 then Rook.new(color)
+    when 3 then Bishop.new(color)
+    when 4 then Knight.new(color)
+    end
+  end
 
   def last_time_piece_captured
     @board.history.history_arr.reverse.each_with_index do |board, index|

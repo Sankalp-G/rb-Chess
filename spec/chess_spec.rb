@@ -240,4 +240,22 @@ describe Chess do
       end
     end
   end
+
+  describe '#promote_pawns' do
+    let(:promotion_board) { Board.new }
+
+    before do
+      promotion_board.place_object_at_coord(Pawn.new(:white), CoordPair.new(0, 6))
+      promotion_board.place_object_at_coord(King.new(:black), CoordPair.new(7, 0))
+      chess_game.instance_variable_set(:@board, promotion_board)
+      allow(chess_game).to receive(:gets).and_return('1')
+      allow(chess_game).to receive(:puts)
+    end
+
+    it 'promotes the pawn to selected piece' do
+      chess_game.promote_pawns
+      board = chess_game.instance_variable_get(:@board)
+      expect(board.piece_at_coord(CoordPair.new(0, 6)).class).to eq(Queen)
+    end
+  end
 end
