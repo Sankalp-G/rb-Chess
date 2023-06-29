@@ -78,7 +78,7 @@ class Chess
   end
 
   def game_over?
-    checkmate? || stalemate? || threefold_repetition? || _50_move_rule?
+    checkmate? || stalemate? || threefold_repetition? || _50_move_rule? || insufficient_material?
   end
 
   def display_game_over_prompt
@@ -92,6 +92,9 @@ class Chess
     elsif _50_move_rule?
       puts "\nThe game is tied due to the 50 move rule!
 Since no pawn has been moved or piece been captured in the last 50 moves."
+    elsif insufficient_material?
+      puts "\nThe game is tied due to insufficient material!
+Since neither player has sufficient material to checkmate the other."
     end
   end
 
