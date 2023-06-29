@@ -1,5 +1,9 @@
 # class dictating main game flow
 class Chess
+  def start
+    main_menu
+  end
+
   def main_menu
     main_menu_prompt
 
