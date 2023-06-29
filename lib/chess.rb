@@ -19,6 +19,7 @@ class Chess
   def start_game_loop
     until game_over?
       Turn.new(@board, @active_player).play
+      promote_pawns if pawn_promotion?
       @board.save_to_history
       switch_player
     end
